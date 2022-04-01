@@ -1,8 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { Routes, Route } from "react-router";
+import Signuppage from "./Pages/Signuppage";
 
-function App() {
-  return <div className="App"></div>;
-}
+const App = () => {
+  return (
+    <div className="App">
+      <Signuppage />
+    </div>
+  );
+};
 
 export default App;
