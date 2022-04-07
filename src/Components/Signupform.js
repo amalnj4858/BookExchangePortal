@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const SignupformStyled = styled.div`
@@ -28,25 +28,33 @@ const Signupform = () => {
   const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState(null);
   const [address, setAddress] = useState(null);
-  useEffect(() => {});
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+
   const onSubmit = (e) => {
     e.preventDefault();
-    //axios
-    setName("");
-    setPhone("");
-    setEmail("");
-    setAddress("");
-    if (!name || !phone || !email || !address) {
+    if (!name || !phone || !email || !address || !password) {
       alert("Please fill all the details");
       return;
     }
+    if (password.length < 8) {
+      alert("Your password is too weak. Requires atleast 8 characters.");
+      return;
+    }
+    if (password != confirmPassword) {
+      alert("Oops! The passwords don't match!");
+      return;
+    }
+
     const user = {
       name: name,
       phone: phone,
       email: email,
       address: address,
       due: 0,
+      password: password,
     };
+
     axios
       .post(`http://localhost:8080/users`, user)
       .then((res) => {
@@ -54,7 +62,6 @@ const Signupform = () => {
       })
       .catch((e) => {
         alert(e.message);
-        console.log(e);
       });
   };
   return (
@@ -90,6 +97,22 @@ const Signupform = () => {
           type="text"
           onChange={(e) => setAddress(e.target.value)}
           value={address}
+        />
+      </div>
+      <div className="details">
+        <label>Set Password</label>
+        <input
+          type="text"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+      </div>
+      <div className="details">
+        <label>Confirm Password</label>
+        <input
+          type="text"
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={confirmPassword}
         />
       </div>
       <input type="submit" className="btn" onClick={onSubmit} />
