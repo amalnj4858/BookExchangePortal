@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const SignupformStyled = styled.div`
   height: 30rem;
@@ -23,13 +24,14 @@ const SignupformStyled = styled.div`
   }
 `;
 
-const Signupform = () => {
+const Signupform = ({ history }) => {
   const [name, setName] = useState(null);
   const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState(null);
   const [address, setAddress] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -59,9 +61,11 @@ const Signupform = () => {
       .post(`http://localhost:8080/users`, user)
       .then((res) => {
         alert("success");
+        navigate("/userslanding", { replace: true });
       })
       .catch((e) => {
-        alert(e.message);
+        alert("duplicate phone/email");
+        return;
       });
   };
   return (

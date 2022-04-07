@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SigninformStyled = styled.div`
   height: 30rem;
@@ -24,9 +25,10 @@ const SigninformStyled = styled.div`
   }
 `;
 
-const Signinform = () => {
+const Signinform = ({ history }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -43,8 +45,10 @@ const Signinform = () => {
     axios
       .post(`http://localhost:8080/users/signin`, user)
       .then((res) => {
-        if (res.data == "Authorised") alert("welcome");
-        else alert(res.data);
+        if (res.data == "Authorised") {
+          alert("welcome");
+          navigate("userslanding");
+        } else alert(res.data);
       })
       .catch((e) => {
         alert(e.message);
