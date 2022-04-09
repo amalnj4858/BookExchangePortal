@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LandingPageOptionsStyled = styled.div`
@@ -11,7 +12,7 @@ const LandingPageOptions = () => {
     <LandingPageOptionsStyled>
       <p>BOOK POOL</p>
       <p>CURRENT LENDINGS</p>
-      <p>LEND A BOOK</p>
+      <Link to="/userslanding/lendabook">LEND A BOOK</Link>
       <p>REQUEST A BOOK</p>
       <p>APPLY FOR EXTENSION</p>
       <p>REQUESTS RECIEVED</p>
