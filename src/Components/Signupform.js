@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { addUser } from "../redux/userActions";
 
 const SignupformStyled = styled.div`
   height: 30rem;
@@ -24,7 +26,7 @@ const SignupformStyled = styled.div`
   }
 `;
 
-const Signupform = ({ history }) => {
+const Signupform = ({ history, addUser }) => {
   const [name, setName] = useState(null);
   const [phone, setPhone] = useState(null);
   const [email, setEmail] = useState(null);
@@ -60,6 +62,8 @@ const Signupform = ({ history }) => {
     axios
       .post(`http://localhost:8080/users`, user)
       .then((res) => {
+        console.log(user);
+        addUser(user);
         alert("success");
         navigate("/userslanding", { replace: true });
       })
@@ -124,4 +128,10 @@ const Signupform = ({ history }) => {
   );
 };
 
-export default Signupform;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUser: (user) => dispatch(addUser(user)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Signupform);

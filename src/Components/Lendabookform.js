@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
+import axios from "axios";
 
 const Lendabookformstyled = styled.div`
   height: 30rem;
@@ -22,10 +24,31 @@ const Lendabookformstyled = styled.div`
   }
 `;
 
-const Lendabookform = () => {
+const Lendabookform = ({ user }) => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [publisher, setPublisher] = useState("");
+
+  const book = {
+    name: name,
+    author: author,
+    publisher: publisher,
+    lender_name: user.name,
+    lender_address: user.address,
+    book_status: "available",
+  };
+
+  const onSubmit = () => {
+    axios
+      .post(`http://localhost:8080/books`, book)
+      .then((res) => {
+        alert("success");
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
+  };
+
   return (
     <Lendabookformstyled>
       <h2>LEND A BOOK</h2>
@@ -53,9 +76,11 @@ const Lendabookform = () => {
           value={publisher}
         />
       </div>
-      <input type="submit" className="btn" />
+      <input type="submit" className="btn" onClick={onSubmit} />
     </Lendabookformstyled>
   );
 };
 
-export default Lendabookform;
+const mapStateToProps = (state) => ({ user: state.users });
+
+export default connect(mapStateToProps)(Lendabookform);
