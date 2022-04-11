@@ -10,7 +10,7 @@ const LandingPageOptionsStyled = styled.div`
 const LandingPageOptions = () => {
   return (
     <LandingPageOptionsStyled>
-      <p>BOOK POOL</p>
+      <Link to="/userslanding/bookpool">BOOK POOL</Link>
       <p>CURRENT LENDINGS</p>
       <Link to="/userslanding/lendabook">LEND A BOOK</Link>
       <p>REQUEST A BOOK</p>
