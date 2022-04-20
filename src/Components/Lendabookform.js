@@ -36,13 +36,17 @@ const Lendabookform = ({ user }) => {
     lender_name: user.name,
     lender_address: user.address,
     book_status: "available",
+    lender_id: user.id,
   };
 
   const onSubmit = () => {
     axios
       .post(`http://localhost:8080/books`, book)
       .then((res) => {
-        alert("success");
+        if (res.data == "Success") {
+          alert("success");
+          return;
+        } else alert("You have already lent this book to the pool.");
       })
       .catch((e) => {
         alert(e.message);

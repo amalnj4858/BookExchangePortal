@@ -5,11 +5,16 @@ import Signinpage from "./Pages/Signinpage";
 import UserLandingPage from "./Pages/UserLandingPage";
 import Lendabookpage from "./Pages/Lendabookpage";
 import Bookpoolpage from "./Pages/Bookpoolpage";
+import Bookrequestpage from "./Pages/Bookrequestpage";
 
 const App = () => {
   return (
     <div className="App">
       <Routes>
+        <Route
+          path="/userslanding/requestabook"
+          element={<Bookrequestpage />}
+        />
         <Route path="/userslanding/bookpool" element={<Bookpoolpage />} />
         <Route path="/userslanding/lendabook" element={<Lendabookpage />} />
         <Route path="/userslanding" element={<UserLandingPage />} />

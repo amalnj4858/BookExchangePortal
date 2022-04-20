@@ -17,7 +17,6 @@ const Bookpoolpage = () => {
       setBooks(res.data);
     });
   }, []);
-  console.log(books);
 
   return (
     <Bookpoolpagestyled>
