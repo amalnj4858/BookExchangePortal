@@ -394,27 +394,34 @@ const Signupform = ({ history, addUser }) => {
 		}
 
 		const user = {
-			name: name,
-			phone: phone,
-			email: email,
-			address: address,
-			due: 0,
-			password: password,
-		};
+      name: name,
+      phone: phone,
+      email: email,
+      address: address,
+      due: 0,
+      password: password,
+    };
 
-		axios
-			.post(`http://localhost:8080/users`, user)
-			.then((res) => {
-				console.log(user);
-				addUser(user);
-				alert("success");
-				navigate("/userslanding", { replace: true });
-			})
-			.catch((e) => {
-				alert("duplicate phone/email");
-				return;
-			});
-	};
+    axios
+      .post(`http://localhost:8080/users`, user)
+      .then((res) => {
+        if (res.data == "Duplicate email") {
+          alert("This email has already been used by another user!");
+          return;
+        } else if (res.data == "Duplicate phone") {
+          alert("This number has already been used by another user!");
+          return;
+        }
+        user.id = parseInt(res.data);
+        addUser(user);
+        alert("success");
+        navigate("/userslanding", { replace: true });
+      })
+      .catch((e) => {
+        alert("duplicate phone/email");
+        return;
+      });
+  };
 	return (
 		<SignInFormStyled className="container-login100">
       <div className="wrap-login100">
@@ -513,6 +520,7 @@ const Signupform = ({ history, addUser }) => {
               </Link>
             </div>
         </form>
+
       </div>
     </SignInFormStyled>
 	);

@@ -9,6 +9,7 @@ const LandingPageOptionsStyled = styled.div`
 `;
 
 const LandingPageOptions = () => {
+
 	return (
 		<LandingPageOptionsStyled>
 			<Link to="/userslanding/bookpool">
@@ -23,6 +24,7 @@ const LandingPageOptions = () => {
 			<p>DUES TO BE PAID</p>
 		</LandingPageOptionsStyled>
 	);
+
 };
 
 export default LandingPageOptions;
