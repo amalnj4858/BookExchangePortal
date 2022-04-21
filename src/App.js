@@ -5,19 +5,21 @@ import Signinpage from "./Pages/Signinpage";
 import UserLandingPage from "./Pages/UserLandingPage";
 import Lendabookpage from "./Pages/Lendabookpage";
 import Bookpoolpage from "./Pages/Bookpoolpage";
+import Navbar from "./Components/Navbar";
 
 const App = () => {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/userslanding/bookpool" element={<Bookpoolpage />} />
-        <Route path="/userslanding/lendabook" element={<Lendabookpage />} />
-        <Route path="/userslanding" element={<UserLandingPage />} />
-        <Route path="/signup" element={<Signuppage />} />
-        <Route path="/" element={<Signinpage />} />
-      </Routes>
-    </div>
-  );
+	return (
+		<div className="App">
+		<Navbar/>
+			<Routes>
+				<Route path="/userslanding/bookpool" element={<Bookpoolpage />} />
+				<Route path="/userslanding/lendabook" element={<Lendabookpage />} />
+				<Route path="/userslanding" element={<UserLandingPage />} />
+				<Route path="/signup" element={<Signuppage />} />
+				<Route path="/" element={<Signinpage />} />
+			</Routes>
+		</div>
+	);
 };
 
 export default App;

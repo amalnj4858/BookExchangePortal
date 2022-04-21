@@ -3,6 +3,10 @@
   height: 100vh;
 }
 
+body{
+  color: #1a0739;
+  background-image: url("./Assets/pattern.svg");
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -22,7 +26,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #1a0739;
 }
 
 .App-link {
