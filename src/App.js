@@ -6,6 +6,7 @@ import UserLandingPage from "./Pages/UserLandingPage";
 import Lendabookpage from "./Pages/Lendabookpage";
 import Bookpoolpage from "./Pages/Bookpoolpage";
 import Bookrequestpage from "./Pages/Bookrequestpage";
+import Requestsrecievedpage from "./Pages/Requestsrecievedpage";
 
 const App = () => {
   return (
@@ -14,6 +15,10 @@ const App = () => {
         <Route
           path="/userslanding/requestabook"
           element={<Bookrequestpage />}
+        />
+        <Route
+          path="/userslanding/requestsrecieved"
+          element={<Requestsrecievedpage />}
         />
         <Route path="/userslanding/bookpool" element={<Bookpoolpage />} />
         <Route path="/userslanding/lendabook" element={<Lendabookpage />} />

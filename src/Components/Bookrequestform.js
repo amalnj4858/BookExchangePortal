@@ -31,10 +31,21 @@ const Bookrequestform = ({ user }) => {
   useEffect(() => {
     axios.get("http://localhost:8080/books").then((res) => {
       setBooks(res.data);
+      setSelectedBook(res.data[0].name);
+      setSelectedLender(res.data[0].lender_name);
     });
   }, []);
   const onSubmit = (e) => {
+    console.log(selectedBook, selectedLender);
     e.preventDefault();
+    if (user === null) {
+      alert("Please login to continue");
+      return;
+    }
+    if (selectedBook === null || selectedLender === null) {
+      alert("Please select a lender and book to continue!");
+      return;
+    }
     axios
       .get(
         `http://localhost:8080/books/getbook?name=${selectedBook}&lender_name=${selectedLender}`
@@ -51,9 +62,32 @@ const Bookrequestform = ({ user }) => {
           lender_id: book.lender_id,
           status: "pending",
         };
+
+        if (book.lender_id === user.id) {
+          alert("You cannot request your own book!");
+          return;
+        }
         axios
           .post("http://localhost:8080/requests", request)
-          .then((res) => alert("success"));
+          .then((res) => {
+            if (res.data == "Request Created") {
+              alert("Request Created!");
+              return;
+            } else if (res.data == "Book not available") {
+              alert("Book is not available at the moment!");
+              return;
+            } else if (res.data == "Duplicate Request") {
+              alert("You have already requested this book!");
+              return;
+            } else {
+              alert("Book does not exist!");
+              return;
+            }
+          })
+          .catch((e) => {
+            alert(e.message);
+            return;
+          });
       });
   };
   return (

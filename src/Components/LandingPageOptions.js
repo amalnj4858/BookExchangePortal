@@ -15,7 +15,7 @@ const LandingPageOptions = () => {
       <Link to="/userslanding/lendabook">LEND A BOOK</Link>
       <Link to="/userslanding/requestabook">REQUEST A BOOK</Link>
       <p>APPLY FOR EXTENSION</p>
-      <p>REQUESTS RECIEVED</p>
+      <Link to="/userslanding/requestsrecieved">REQUESTS RECIEVED</Link>
       <p>RETURN BOOK</p>
       <p>DUES TO BE PAID</p>
     </LandingPageOptionsStyled>

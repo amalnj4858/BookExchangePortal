@@ -62,7 +62,14 @@ const Signupform = ({ history, addUser }) => {
     axios
       .post(`http://localhost:8080/users`, user)
       .then((res) => {
-        console.log(user);
+        if (res.data == "Duplicate email") {
+          alert("This email has already been used by another user!");
+          return;
+        } else if (res.data == "Duplicate phone") {
+          alert("This number has already been used by another user!");
+          return;
+        }
+        user.id = parseInt(res.data);
         addUser(user);
         alert("success");
         navigate("/userslanding", { replace: true });
