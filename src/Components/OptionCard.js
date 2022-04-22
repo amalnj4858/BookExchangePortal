@@ -19,7 +19,7 @@ export const OptionCard = ({ name }) => {
         <OptionCardStyled className="OptionCardStyled">
             <div className="mainbox">
                 <div className="image">
-
+                
                 </div>
                 <div className="title">
                     {name}
