@@ -40,6 +40,10 @@ const Lendabookform = ({ user }) => {
   };
 
   const onSubmit = () => {
+    if (!user) {
+      alert("Please login to continue");
+      return;
+    }
     axios
       .post(`http://localhost:8080/books`, book)
       .then((res) => {

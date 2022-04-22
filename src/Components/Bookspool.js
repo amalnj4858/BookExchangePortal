@@ -22,6 +22,7 @@ const Bookpool = ({ data }) => {
           <th>Publisher</th>
           <th>Lender Name</th>
           <th>Lender Address</th>
+          <th>Book Status</th>
         </tr>
         {data.map((row) => {
           return (
@@ -31,6 +32,7 @@ const Bookpool = ({ data }) => {
               <td>{row.publisher}</td>
               <td>{row.lender_name}</td>
               <td>{row.lender_address}</td>
+              <td>{row.book_status}</td>
             </tr>
           );
         })}

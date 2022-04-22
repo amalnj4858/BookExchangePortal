@@ -370,30 +370,30 @@ const SignInFormStyled = styled.div`
 `;
 
 const Signupform = ({ history, addUser }) => {
-	const [name, setName] = useState(null);
-	const [phone, setPhone] = useState(null);
-	const [email, setEmail] = useState(null);
-	const [address, setAddress] = useState(null);
-	const [password, setPassword] = useState(null);
-	const [confirmPassword, setConfirmPassword] = useState(null);
-	const navigate = useNavigate();
+  const [name, setName] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [address, setAddress] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+  const navigate = useNavigate();
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		if (!name || !phone || !email || !address || !password) {
-			alert("Please fill all the details");
-			return;
-		}
-		if (password.length < 8) {
-			alert("Your password is too weak. Requires atleast 8 characters.");
-			return;
-		}
-		if (password != confirmPassword) {
-			alert("Oops! The passwords don't match!");
-			return;
-		}
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!name || !phone || !email || !address || !password) {
+      alert("Please fill all the details");
+      return;
+    }
+    if (password.length < 8) {
+      alert("Your password is too weak. Requires atleast 8 characters.");
+      return;
+    }
+    if (password != confirmPassword) {
+      alert("Oops! The passwords don't match!");
+      return;
+    }
 
-		const user = {
+    const user = {
       name: name,
       phone: phone,
       email: email,
@@ -422,47 +422,47 @@ const Signupform = ({ history, addUser }) => {
         return;
       });
   };
-	return (
-		<SignInFormStyled className="container-login100">
+  return (
+    <SignInFormStyled className="container-login100">
       <div className="wrap-login100">
         <form className="login100-form">
           <span className="login100-form-title">
-              <div style={{ marginBottom: "-1em" }}>
-                <b className="welcome">Welcome</b>
-              </div>
-          </span>
-            <div>
-              <div className="wrap-input100 ">
-                <input
-                  className="input100"
-                  type="text"
-                  name="name"
-                  placeholder="  Name*"
-                  onChange={(e) => setName(e.target.value)}
-			   value={name}
-                />
-                <span className="focus-input100"></span>
-                <span className="symbol-input100">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                </span>
-              </div>
-
-              <div className="wrap-input100 ">
-                <input
-                  className="input100"
-                  type="tel"
-                  name="phone_no"
-                  placeholder="  Mobile Number*"
-                  maxLength="10"
-                  onChange={(e) => setPhone(e.target.value)}
-			   value={phone}
-                />
-                <span className="focus-input100"></span>
-                <span className="symbol-input100">
-                  <i class="fa fa-phone-square" aria-hidden="true"></i>
-                </span>
-              </div>
+            <div style={{ marginBottom: "-1em" }}>
+              <b className="welcome">Welcome</b>
             </div>
+          </span>
+          <div>
+            <div className="wrap-input100 ">
+              <input
+                className="input100"
+                type="text"
+                name="name"
+                placeholder="  Name*"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+              />
+              <span className="focus-input100"></span>
+              <span className="symbol-input100">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <div className="wrap-input100 ">
+              <input
+                className="input100"
+                type="tel"
+                name="phone_no"
+                placeholder="  Mobile Number*"
+                maxLength="10"
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
+              />
+              <span className="focus-input100"></span>
+              <span className="symbol-input100">
+                <i class="fa fa-phone-square" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
           <div className="wrap-input100 ">
             <input
               className="input100"
@@ -470,7 +470,22 @@ const Signupform = ({ history, addUser }) => {
               name="email"
               placeholder="  Email*"
               onChange={(e) => setEmail(e.target.value)}
-		    value={email}
+              value={email}
+            />
+            <span className="focus-input100"></span>
+            <span className="symbol-input100">
+              <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div className="wrap-input100 ">
+            <input
+              className="input100"
+              type="text"
+              name="address"
+              placeholder="  Address*"
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
             />
             <span className="focus-input100"></span>
             <span className="symbol-input100">
@@ -485,21 +500,21 @@ const Signupform = ({ history, addUser }) => {
               name="pass"
               placeholder="  Password*"
               onChange={(e) => setPassword(e.target.value)}
-			value={password}
+              value={password}
             />
             <span className="focus-input100"></span>
             <span className="symbol-input100">
               <i class="fa fa-key" aria-hidden="true"></i>
             </span>
           </div>
-		<div className="wrap-input100">
+          <div className="wrap-input100">
             <input
               className="input100"
               type="password"
               name="pass"
               placeholder="  Confirm Password*"
               onChange={(e) => setConfirmPassword(e.target.value)}
-			value={confirmPassword}
+              value={confirmPassword}
             />
             <span className="focus-input100"></span>
             <span className="symbol-input100">
@@ -507,29 +522,25 @@ const Signupform = ({ history, addUser }) => {
             </span>
           </div>
           <div className="container-login100-form-btn">
-            <button
-              className="login100-form-btn"
-              onClick={onSubmit}
-            >
+            <button className="login100-form-btn" onClick={onSubmit}>
               <b>Sign Up</b>
             </button>
           </div>
-            <div className="text-center p-t-35-white">
-              <Link className="link" to="/">
-                <p className="already">Already a user? Sign in</p>
-              </Link>
-            </div>
+          <div className="text-center p-t-35-white">
+            <Link className="link" to="/">
+              <p className="already">Already a user? Sign in</p>
+            </Link>
+          </div>
         </form>
-
       </div>
     </SignInFormStyled>
-	);
+  );
 };
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		addUser: (user) => dispatch(addUser(user)),
-	};
+  return {
+    addUser: (user) => dispatch(addUser(user)),
+  };
 };
 
 export default connect(null, mapDispatchToProps)(Signupform);
