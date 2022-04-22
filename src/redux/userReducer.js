@@ -5,7 +5,10 @@ const userReducer = (state = initialState, action) => {
     case "ADD_USER": {
       return {
         ...action.payload,
-      };
+      }
+    }
+    case "SIGN_OUT":{
+      return null
     }
     default:
       return state;

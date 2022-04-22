@@ -96,20 +96,24 @@ const SignInFormStyled = styled.div`
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
-	background: #1a0739;
+	background: #081e31;
+	background-image: url("../Assets/bgpattern.svg"); 
 }
+& .alreadylink{
+    text-decoration: none;
+    color:white;
+  }
 
 & .wrap-login100 {
 	width: 95%;
 	border: 2px solid black;
-	background: #1a0739;
+	background: #DA0037;
 	background-image: url("../Assets/pattern.svg");
 	border-radius: 10px;
 	overflow: hidden;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	background-color: #9555ff;
 	align-items: center;
 	padding: 2em 2em 2em 2em;
 	box-shadow: 10px 10px 5px #E2CFEA;
@@ -158,7 +162,8 @@ const SignInFormStyled = styled.div`
 	line-height: 1.5;
 	color: #666666;
 	display: block;
-	width: 80%;
+	width: 70%;
+	align-self:center;
 	background: #e6e6e6;
 	height: 50px;
 	border-radius: 25px;
@@ -193,7 +198,7 @@ const SignInFormStyled = styled.div`
 	position: absolute;
 	border-radius: 25px;
 	bottom: 0;
-	left: 0;
+	left: -10px;
 	width: 100%;
 	height: 100%;
 	padding-left: 35px;
@@ -220,11 +225,12 @@ const SignInFormStyled = styled.div`
 }
 
 & .input100:focus + .focus-input100 + .symbol-input100 {
-	color: #1a0739;
+	color: #da0037;
 	padding-left: 28px;
 }
 & .container-login100 {
 	background-color:#1a0739;
+	background-image: url("../Assets/bgpattern.svg"); 
 }
 & .container-login100-form-btn {
 	width: 100%;
@@ -235,23 +241,23 @@ const SignInFormStyled = styled.div`
 	
 }
 & .welcomeback{
-	color:#b5f7e7	;
+	color:white	;
 	font-family: 'Ms Madi', cursive;
-	font-size:2em;
+	font-size:1.7em;
 }
 & .already{
-	color:#b5f7e7;
+	color:white;
 }
 
 & .login100-form-btn {
 	font-family: "Montserrat", sans-serif;
 	font-size: 15px;
 	line-height: 1.5;
-	color: black;
+	color: white;
 	width: 100%;
 	height: 42px;
 	border-radius: 25px;
-	background: #b5f7e7;
+	background: #081e31;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -260,8 +266,8 @@ const SignInFormStyled = styled.div`
 }
 
 & .login100-form-btn:hover {
-	background: #1a0739;
-	color:#f5c87e;
+	background: #DAA520;
+	color:#081e31;
 }
 
 }
@@ -387,7 +393,7 @@ const Signinform = ({ addUser }) => {
 					</div>
 						<div>
 							<div className="text-center p-t-35">
-								<Link className="txt2"  to="/signup">
+								<Link className="txt2 alreadylink"  to="/signup">
 									<p className="already">
 									Create your Account
 									</p>

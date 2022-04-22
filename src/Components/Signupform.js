@@ -86,13 +86,16 @@ const SignInFormStyled = styled.div`
 
   & {
     width: 30%;
-    height: 90vh;
+    height: 70vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    background: #1a0739;
+    background: #081e31;
+    margin-top:-5em;
+    background-image: url("../../Assets/bgpattern.svg"); 
+    ;
   }
 
   & .wrap-login100 {
@@ -101,13 +104,14 @@ const SignInFormStyled = styled.div`
     background: white;
     border-radius: 10px;
     overflow: hidden;
-    background:#9555ff;
+    background:#DA0037;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 2em 2em 2em 2em;
     box-shadow: 10px 10px 5px #E2CFEA;
+    margin-top:-0.5em;
   }
 
   & .p-t-12 {
@@ -135,6 +139,8 @@ const SignInFormStyled = styled.div`
     text-align: center;
     width: 100%;
     display: block;
+    margin-top:-0.7em;
+    margin-bottom:-0.7em;
     padding-bottom: 54px;
   }
 
@@ -152,7 +158,8 @@ const SignInFormStyled = styled.div`
     line-height: 1.5;
     color: #666666;
     display: block;
-    width: 80%;
+    width: 70%;
+    aign-self:center;
     background: #e6e6e6;
     height: 50px;
     border-radius: 25px;
@@ -187,7 +194,7 @@ const SignInFormStyled = styled.div`
     position: absolute;
     border-radius: 25px;
     bottom: 0;
-    left: 0;
+    left: -10px;
     width: 100%;
     height: 100%;
     padding-left: 35px;
@@ -214,7 +221,7 @@ const SignInFormStyled = styled.div`
   }
 
   & .input100:focus + .focus-input100 + .symbol-input100 {
-    color: #1a0739;
+    color: #da0037;
     padding-left: 28px;
   }
 
@@ -230,11 +237,11 @@ const SignInFormStyled = styled.div`
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
     line-height: 1.5;
-    color: black;
+    color: white;
     width: 100%;
     height: 42px;
     border-radius: 25px;
-    background: #b5f7e7;
+    background: #081e31;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -243,9 +250,9 @@ const SignInFormStyled = styled.div`
   }
 
   & .login100-form-btn:hover {
-	background: #1a0739;
-	color:#f5c87e;
-}
+    background: #DAA520;
+    color:#081e31;
+  
   }
 
   & .orline {
@@ -308,7 +315,9 @@ const SignInFormStyled = styled.div`
       letter-spacing: 0.2px;
       font-family: "Roboto";
     }
-
+    & .confirmpass{
+      margin-left:-10px;
+    }
     &:hover {
       box-shadow: 0 0 6px #4285f4;
     }
@@ -359,13 +368,20 @@ const SignInFormStyled = styled.div`
     }
   }
   & .welcome{
-	  color:#b5f7e7;
+	  color:white;;
 	  font-family: 'Ms Madi', cursive;
-	  font-size:2em;
+	  font-size:1.7em;
+    margin-top:-9em;
   }
   & .already{
 	  margin-top:1em;
-	  color:#b5f7e7;
+	  color:white;
+    margin-bottom:-1.8em; 
+    text-decoration: none;
+  }
+  & .alreadylink{
+    text-decoration: none;
+    color:white;
   }
 `;
 
@@ -489,7 +505,7 @@ const Signupform = ({ history, addUser }) => {
             />
             <span className="focus-input100"></span>
             <span className="symbol-input100">
-              <i class="fa fa-envelope fa-1x" aria-hidden="true"></i>
+            <i class="fa fa-address-book" aria-hidden="true"></i>
             </span>
           </div>
 
@@ -527,7 +543,7 @@ const Signupform = ({ history, addUser }) => {
             </button>
           </div>
           <div className="text-center p-t-35-white">
-            <Link className="link" to="/">
+            <Link className="link alreadylink" to="/" >
               <p className="already">Already a user? Sign in</p>
             </Link>
           </div>

@@ -1,56 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import { signOutUser } from "../redux/userActions";
 
 const Nav = styled.div`
 	height: 10vh;
 	min-height: 50px;
-	background: #9555FF;
+	background: #DA0037;
 	display: flex;
-	align-items: center;
+	flex-wrap:wrap;
+    align-items: center;
 	gap: 2em;
 	width: 100%;
 	box-sizing: border-box;
 	max-width: 100vw;
 	z-index: 2;
   }
-  & .line {
-	border: 0;
-	border-top: 2px solid #eee;
+  & .main{
+	display: flex;
+	flex-wrap:wrap;
+    align-items: center;
   }
-  & .drop {
-	padding-left: 1em;
+  & .Navbar{
+	  display:flex;
+	  flex-wrap:wrap;
+	  justify-content:center;
+	  margin-left:auto;
+	  margin-right:auto;
   }
   & .link {
 	text-decoration: none;
 	color: black;
 	transition-duration: 0.3s;
+	margin-left:1em;
+	margin-right:1em;
+	font-size:1em;
+	font-weight:600;
+	color:white;
+	padding:0.1em;
+	border-radius:0.5em;
   }
   & .home {
 	margin-left: 3em;
   }
-  & .auth {
-	margin-left: auto;
-  }
-  & .signup {
-	margin-right: 3em;
-	padding: 0.4em;
-	border: 2px black solid;
-	border-radius: 3em;
-  }
+  
   & .link:hover {
-	color: gray;
+	color: #081f30;
   }
-  & .signup:hover {
-	background: black;
-	color: #b5f7e7;
-  }
+  
   & .Heading{
-	color:#b5f7e7	;
+	color:white	;
 	font-family: 'Ms Madi', cursive;
-	font-size:4em;
+	font-size:3em;
 	font-weight:600;
 	display:flex;
 	flex-wrap:wrap;
@@ -59,6 +61,17 @@ const Nav = styled.div`
 	margin-left:auto;
 	margin-right:auto;
   }
+  & .signout{
+	display: flex;
+	flex-wrap:wrap;
+    align-items: right;
+    justify-content:center;
+    margin-left:12em;
+    font-weight:800;
+    border: solid black 3px;
+    border-radius:5em;
+    padding:0.1em;
+}
 
   @media (max-width: 768px) {
 	& .contact {
@@ -67,8 +80,8 @@ const Nav = styled.div`
 	& .auth {
 	  display: none;
 	}
-	& .signup {
-	  display: none;
+	& .signout {
+		margin-left:20em;
 	}
 	& .dropdown-img {
 	  display: flex;
@@ -89,13 +102,15 @@ const Nav = styled.div`
   }
 `;
 
-const Navbar = ({ currentUser, history, signOutCurrentUser }) => {
-  const [isVisible, setIsVisible] = useState(false);
+const Navbar = ({ user,signOut }) => {
+
  const onSignOutClick = () => {
+	 signOut();
   };
+  console.log(user);
   return (
 	<Nav className="Navbar">
-	  {currentUser ? (<div>
+	  {user ? (<div className="main">
 	<Link to="/userslanding" className="link home">
 		Home
 	  </Link>
@@ -103,25 +118,40 @@ const Navbar = ({ currentUser, history, signOutCurrentUser }) => {
 		Book Pool
 	  </Link>
 	  <Link to="/userslanding/lendabook" className="link contact">
-		Lend A Book
+		Lend a Book
 	  </Link>
-	  <Link to="/" className="link contact">
+	  <Link to="/userslanding/bookpoo" className="link contact">
+	Request a Book
+	  </Link>
+	  <Link to="/userslanding/bookpoo" className="link contact">
+		Apply for Extension
+	  </Link>
+	  <Link to="/userslanding/bookpoo" className="link contact">
+		Requests Recieved
+	  </Link>
+	  <Link to="/userslanding/bookpoo" className="link contact">
+		Return Book
+	  </Link>
+	  <Link to="/userslanding/bookpoo" className="link contact">
+	Dues
+	  </Link>
+	  <div className="signout">
+	  <Link to="/" className="link " onClick={onSignOutClick}>
 		Sign Out
-	  </Link></div>):<div className="Heading"><div>Book  Exchange  Portal</div></div>}
+
+	  </Link></div></div>):<div className="Heading"><div>Book  Exchange  Portal</div></div>}
 	</Nav>
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
+const mapStateToProps = (state) => ({ user: state.users });
+const mapDispatchToProps = (dispatch) => {
+	return {
+		signOut:()=>dispatch(signOutUser())
+	};
+};
 
-// const mapDispatchToProps = (dispatch) => ({
-//   signOutCurrentUser: () => dispatch(signOutUser()),
-// });
 
-export default Navbar;
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
+export default connect(mapStateToProps,mapDispatchToProps)(Navbar);
 
-//export default withRouter(connect(mapStateToProps)(Navbar));
