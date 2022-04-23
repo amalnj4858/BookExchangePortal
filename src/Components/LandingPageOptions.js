@@ -6,7 +6,6 @@ import { OptionCard } from "./OptionCard.js";
 const LandingPageOptionsStyled = styled.div`
   display: flex;
   flex-direction: column;
-  
 `;
 
 const LandingPageOptions = () => {
@@ -20,7 +19,7 @@ const LandingPageOptions = () => {
       <Link to="/userslanding/requestabook">REQUEST A BOOK</Link>
       <p>APPLY FOR EXTENSION</p>
       <Link to="/userslanding/requestsrecieved">REQUESTS RECIEVED</Link>
-      <p>RETURN BOOK</p>
+      <Link to="/userslanding/returnbook">RETURN BOOK</Link>
       <p>DUES TO BE PAID</p>
     </LandingPageOptionsStyled>
   );
