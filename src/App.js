@@ -9,11 +9,12 @@ import Navbar from "./Components/Navbar";
 
 import Bookrequestpage from "./Pages/Bookrequestpage";
 import Requestsrecievedpage from "./Pages/Requestsrecievedpage";
+import Bookreturnpage from "./Pages/Bookreturnpage";
 
 const App = () => {
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar />
       <Routes>
         <Route
           path="/userslanding/requestabook"
@@ -23,6 +24,7 @@ const App = () => {
           path="/userslanding/requestsrecieved"
           element={<Requestsrecievedpage />}
         />
+        <Route path="/userslanding/returnbook" element={<Bookreturnpage />} />
         <Route path="/userslanding/bookpool" element={<Bookpoolpage />} />
         <Route path="/userslanding/lendabook" element={<Lendabookpage />} />
         <Route path="/userslanding" element={<UserLandingPage />} />
@@ -31,7 +33,6 @@ const App = () => {
       </Routes>
     </div>
   );
-
 };
 
 export default App;

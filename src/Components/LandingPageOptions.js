@@ -27,11 +27,19 @@ const LandingPageOptions = () => {
 			<Link className="link" to="/userslanding/bookpool">
 				<OptionCard name={"Book Pool"} photoURL={bookPoolPhoto }/>
 			</Link>
-			<Link to="/userslanding/lendabook" className="link"><OptionCard name={"Lend a Book"} /></Link>
-			<Link to="/userslanding/requestabook" className="link"><OptionCard name={"Request a Book"} /></Link>
+			<Link to="/userslanding/lendabook" className="link">
+				<OptionCard name={"Lend a Book"} />
+			</Link>
+			<Link to="/userslanding/requestabook" className="link">
+				<OptionCard name={"Request a Book"} />
+			</Link>
 			<OptionCard name={"Apply for Extension"} />
-			<Link to="/userslanding/requestsrecieved" className="link"><OptionCard name={"Requests Recieved"} /></Link>
-			<OptionCard name={"Return Book"} />
+			<Link to="/userslanding/requestsrecieved" className="link">
+				<OptionCard name={"Requests Recieved"} />
+			</Link>
+			<Link to="/userslanding/returnbook">
+				<OptionCard name={"Return Book"} />
+			</Link>
 			<OptionCard name={"Dues to be paid"} />
 			</div>
 		</LandingPageOptionsStyled>
