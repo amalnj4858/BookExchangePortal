@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router";
 import styled from "styled-components";
 
 const Requestcardstyled = styled.div`
@@ -15,7 +16,7 @@ const Requestcardstyled = styled.div`
 const Requestcard = ({ request }) => {
   const [bookname, setBookname] = useState(null);
   const [borrower, setBorrower] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`http://localhost:8080/books/getbookbyid?bookid=${request.book_id}`)
@@ -42,7 +43,10 @@ const Requestcard = ({ request }) => {
     };
     axios
       .post("http://localhost:8080/transactions", transaction)
-      .then((res) => alert(res.data));
+      .then((res) => {
+        alert(res.data);
+        navigate("/userslanding", { replace: true });
+      });
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const Returnbookcardstyled = styled.div`
   height: 30rem;
@@ -19,6 +20,7 @@ const Returnbookcardstyled = styled.div`
 
 const Returnbookcard = ({ book, user }) => {
   const [bookLent, setBookLent] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -31,13 +33,27 @@ const Returnbookcard = ({ book, user }) => {
       alert("Please login to continue");
       return;
     }
+    const currdate = new Date();
+    const expectedReturnDate = new Date(book.expected_return_date);
+    let dayslapsed =
+      (currdate.getTime() - expectedReturnDate.getTime()) / (1000 * 3600 * 24);
+    if (dayslapsed < 0) dayslapsed = 0;
     axios
-      .post(`http://localhost:8080/books`, book)
+      .post(
+        `http://localhost:8080/books/returnbook?bookid=${
+          book.book_id
+        }&returndate=${currdate.getFullYear()}-${
+          currdate.getMonth() + 1 < 10
+            ? `0${currdate.getMonth() + 1}`
+            : `${currdate.getMonth() + 1}`
+        }-${currdate.getDate()}&numberofdayslate=${dayslapsed}&userid=${
+          user.id
+        }&transactionid=${book.id}`,
+        null
+      )
       .then((res) => {
-        if (res.data == "Success") {
-          alert("success");
-          return;
-        } else alert("You have already lent this book to the pool.");
+        alert(res.data);
+        navigate("/userslanding", { replace: true });
       })
       .catch((e) => {
         alert(e.message);
@@ -64,7 +80,7 @@ const Returnbookcard = ({ book, user }) => {
             <div>Return by:</div>
             <div>{book.expected_return_date}</div>
           </span>
-          <button>Return</button>
+          <button onClick={onSubmit}>Return</button>
         </>
       ) : null}
     </Returnbookcardstyled>
