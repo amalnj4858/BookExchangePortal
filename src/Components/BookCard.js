@@ -44,7 +44,7 @@ const BookCardStyled = styled.div`
         text-align:left;
         gap:1.5em;
     }
-    & .right{
+    & .right{  
         display:flex;
         flex-direction:column;
         justify-self:right;
