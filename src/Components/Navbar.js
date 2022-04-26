@@ -120,16 +120,16 @@ const Navbar = ({ user,signOut }) => {
 	  <Link to="/userslanding/lendabook" className="link contact">
 		Lend a Book
 	  </Link>
-	  <Link to="/userslanding/bookpoo" className="link contact">
+	  <Link to="/userslanding/requestabook" className="link contact">
 	Request a Book
 	  </Link>
 	  <Link to="/userslanding/bookpoo" className="link contact">
 		Apply for Extension
 	  </Link>
-	  <Link to="/userslanding/bookpoo" className="link contact">
+	  <Link to="/userslanding/requestsrecieved" className="link contact">
 		Requests Recieved
 	  </Link>
-	  <Link to="/userslanding/bookpoo" className="link contact">
+	  <Link to="/userslanding/returnbook" className="link contact">
 		Return Book
 	  </Link>
 	  <Link to="/userslanding/bookpoo" className="link contact">

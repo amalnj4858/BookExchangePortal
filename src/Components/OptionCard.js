@@ -5,20 +5,19 @@ const OptionCardStyled = styled.div`
 & {
     margin-top: 2em;
     gap: 5em;
+    margin-bottom:2em;
   }
 & .mainbox{
     display: flex;
     flex-direction: column;
-    background:white;
     width:20em;
 }
 & .top-part{
-    background-color:#3c4959;
     height:10em;
 }
 & .title{
     text-decoration: none;
-    font-size:1.8em;
+    font-size:1.4em;
     margin-top:0em;
     font-weight:600;
     margin-left:1em;
@@ -27,7 +26,12 @@ const OptionCardStyled = styled.div`
 & .bottom-part{
     background-color:#da0037;
     color:white;
-    height:3em;
+    height:2.5em;
+    border-radius:3em;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
 }
 & .photo{
     height:8em;

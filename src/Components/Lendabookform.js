@@ -246,7 +246,7 @@ const Lendabookform = ({ user }) => {
 							className="login100-form-btn"
 							onClick={onSubmit}
 						>
-							<b>Sign In</b>
+							<b>Submit</b>
 						</button>
 			</div>
 		</div>

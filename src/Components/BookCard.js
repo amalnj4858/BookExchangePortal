@@ -48,10 +48,10 @@ const BookCardStyled = styled.div`
         display:flex;
         flex-direction:column;
         justify-self:right;
-        gap:1.5em
-		width:10em;
+        gap:1.5em;
+		max-width:30em;
     }
-	& .lender-adress{
+	& .lender_adress{
 		display:flex;
 		flex-wrap:wrap;
 	}
@@ -87,6 +87,7 @@ const BookCardStyled = styled.div`
         align-self:center;
         display:flex;
         flex-wrap:wrap;
+		font-size:1.5em;
         gap:0.5em;
     }
     & .available{
@@ -141,7 +142,11 @@ export const BookCard = ({
                     </div>
                     <div className="right">
                         <div className="lender_name icon-desc"><i class="fa fa-users icon" aria-hidden="true"></i> <span className="heading">Lender Name:</span> {lender_name} </div>
-                        <div className="lender_adress icon-desc"><i class="fa fa-address-card-o icon" aria-hidden="true"></i> <span className="heading">Lender Address:</span> {lender_address} </div>
+                        <div className="lender_adress icon-desc">
+							<div><i class="fa fa-address-card-o icon" aria-hidden="true"></i></div>
+							 <div className="heading">Lender Address:</div>
+							 <div>{lender_address}</div> 
+						</div>
                     </div>
                     </div>
                     <div className="book_status icon-desc"><i class="fa fa-superpowers icon" aria-hidden="true"></i><p className="available">{book_status}</p> </div>

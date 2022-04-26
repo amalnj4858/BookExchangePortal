@@ -1,2 +1,3 @@
 glitches- 
-navbar does not change when signing up
+1.when refreshing nabar doesnt work
+2. BookRequestCard- user prop needed?

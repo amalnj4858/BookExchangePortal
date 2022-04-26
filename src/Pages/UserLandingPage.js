@@ -7,7 +7,7 @@ const UserLandingPageStyled = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	margin-top:12vh;
+	margin-top:5vh;
 `;
 const UserLandingPage = () => {
 	return (
