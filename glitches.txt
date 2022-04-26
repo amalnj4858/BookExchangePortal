@@ -1,0 +1,2 @@
+glitches- 
+navbar does not change when signing up

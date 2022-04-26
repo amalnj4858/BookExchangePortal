@@ -114,7 +114,7 @@ const Navbar = ({ user,signOut }) => {
 	<Link to="/userslanding" className="link home">
 		Home
 	  </Link>
-	  <Link to="/userslanding/bookpoo" className="link contact">
+	  <Link to="/userslanding/bookpool" className="link contact">
 		Book Pool
 	  </Link>
 	  <Link to="/userslanding/lendabook" className="link contact">
