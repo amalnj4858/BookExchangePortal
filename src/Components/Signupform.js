@@ -409,6 +409,11 @@ const Signupform = ({ history, addUser }) => {
       return;
     }
 
+    if (name.toLowerCase() === "admin") {
+      alert("This name is not allowed.");
+      return;
+    }
+
     const user = {
       name: name,
       phone: phone,
@@ -505,7 +510,7 @@ const Signupform = ({ history, addUser }) => {
             />
             <span className="focus-input100"></span>
             <span className="symbol-input100">
-            <i class="fa fa-address-book" aria-hidden="true"></i>
+              <i class="fa fa-address-book" aria-hidden="true"></i>
             </span>
           </div>
 
@@ -543,7 +548,7 @@ const Signupform = ({ history, addUser }) => {
             </button>
           </div>
           <div className="text-center p-t-35-white">
-            <Link className="link alreadylink" to="/" >
+            <Link className="link alreadylink" to="/">
               <p className="already">Already a user? Sign in</p>
             </Link>
           </div>

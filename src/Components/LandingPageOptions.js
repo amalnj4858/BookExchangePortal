@@ -8,19 +8,30 @@ const LandingPageOptionsStyled = styled.div`
   flex-direction: column;
 `;
 
-const LandingPageOptions = () => {
+const LandingPageOptions = ({ loggedin }) => {
   return (
     <LandingPageOptionsStyled>
-      <Link to="/userslanding/bookpool">
-        <OptionCard name={"Book Pool"} />
-      </Link>
-
-      <Link to="/userslanding/lendabook">LEND A BOOK</Link>
-      <Link to="/userslanding/requestabook">REQUEST A BOOK</Link>
-      <p>APPLY FOR EXTENSION</p>
-      <Link to="/userslanding/requestsrecieved">REQUESTS RECIEVED</Link>
-      <Link to="/userslanding/returnbook">RETURN BOOK</Link>
-      <p>DUES TO BE PAID</p>
+      {loggedin === "admin" ? (
+        <>
+          <p>USERS</p>
+          <p>BOOKS</p>
+          <p>TRANSACTIONS</p>
+          <p>REQUESTS</p>
+        </>
+      ) : (
+        <>
+          <Link to="/userslanding/bookpool">
+            <OptionCard name={"Book Pool"} />
+          </Link>
+          <Link to="/userslanding/profile">MY PROFILE</Link>
+          <Link to="/userslanding/lendabook">LEND A BOOK</Link>
+          <Link to="/userslanding/requestabook">REQUEST A BOOK</Link>
+          <p>APPLY FOR EXTENSION</p>
+          <Link to="/userslanding/requestsrecieved">REQUESTS RECIEVED</Link>
+          <Link to="/userslanding/returnbook">RETURN BOOK</Link>
+          <Link to="/userslanding/paydues">DUES TO BE PAID</Link>
+        </>
+      )}
     </LandingPageOptionsStyled>
   );
 };
