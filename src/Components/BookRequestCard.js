@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
- import { connect } from "react-redux";
+import { connect } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
-
 
 const BookRequestCardStyled = styled.div`
 	& {
@@ -137,109 +136,117 @@ const BookRequestCardStyled = styled.div`
 	}
 `;
 
-const BookRequestCard = ({
-	user,
-	name,
-	lender_name,
-}) => {
+const BookRequestCard = ({ user, name, lender_name, author, publisher }) => {
+  const navigate = useNavigate();
 
-	const navigate = useNavigate();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (user === null) {
+      alert("Please login to continue");
+      return;
+    }
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		if (user === null) {
-			alert("Please login to continue");
-			return;
-		}
+    axios
+      .get(`http://localhost:8080/users/findbyid?id=${user.id}`)
+      .then((res) => {
+        if (res.data.due_amt === 0) {
+          axios
+            .get(
+              `http://localhost:8080/books/getbook?name=${name}&lender_name=${lender_name}`
+            )
+            .then((res) => {
+              const book = res.data;
+              if (book.id === 0) {
+                alert("Book does not exist");
+                return;
+              }
+              const request = {
+                borrower_id: user.id,
+                book_id: book.id,
+                lender_id: book.lender_id,
+                status: "pending",
+              };
 
-		axios
-			.get(`http://localhost:8080/users/findbyid?id=${user.id}`)
-			.then((res) => {
-				if (res.data.due_amt === 0) {
-					axios
-						.get(
-							`http://localhost:8080/books/getbook?name=${name}&lender_name=${lender_name}`
-						)
-						.then((res) => {
-							const book = res.data;
-							if (book.id === 0) {
-								alert("Book does not exist");
-								return;
-							}
-							const request = {
-								borrower_id: user.id,
-								book_id: book.id,
-								lender_id: book.lender_id,
-								status: "pending",
-							};
+              if (book.lender_id === user.id) {
+                alert("You cannot request your own book!");
+                return;
+              }
+              axios
+                .post("http://localhost:8080/requests", request)
+                .then((res) => {
+                  if (res.data === "Request Created") {
+                    alert("Request Created!");
+                    navigate("/userslanding", { replace: true });
+                    return;
+                  } else if (res.data === "Book not available") {
+                    alert("Book is not available at the moment!");
+                    return;
+                  } else if (res.data === "Duplicate Request") {
+                    alert("You have already requested this book!");
+                    return;
+                  } else {
+                    alert("Book does not exist!");
+                    return;
+                  }
+                })
+                .catch((e) => {
+                  alert(e.message);
+                  return;
+                });
+            });
+        } else {
+          alert(
+            `You owe the portal Rs.${res.data.due_amt}. Please pay off the dues to continue using the portal.`
+          );
+        }
+      });
+  };
 
-							if (book.lender_id === user.id) {
-								alert("You cannot request your own book!");
-								return;
-							}
-							axios
-								.post("http://localhost:8080/requests", request)
-								.then((res) => {
-									if (res.data === "Request Created") {
-										alert("Request Created!");
-										navigate("/userslanding", { replace: true });
-										return;
-									} else if (res.data === "Book not available") {
-										alert("Book is not available at the moment!");
-										return;
-									} else if (res.data === "Duplicate Request") {
-										alert("You have already requested this book!");
-										return;
-									} else {
-										alert("Book does not exist!");
-										return;
-									}
-								})
-								.catch((e) => {
-									alert(e.message);
-									return;
-								});
-						});
-				} else {
-					alert(
-						`You owe the portal Rs.${res.data.due_amt}. Please pay off the dues to continue using the portal.`
-					);
-				}
-			});
-	};
-
-	return (
-		<BookRequestCardStyled>
-		<Flippy flipOnHover={true} className="card">
-			<FrontSide>
-				<div className="mainbox">
-					<div className="topbox">
-						<div className="name">{name}</div>
-					</div>
-					<div className="bottombox">
-						<div className="lender_name">
-								<div><i class="fa fa-address-card-o icon" aria-hidden="true"></i></div>
-								<div className="heading">Lender Name:</div>
-								<div>{lender_name}</div> 
-						</div>
-					</div>
-				</div>
-			</FrontSide>	
-			<BackSide>
-					<div className="container-login100-form-btn back-side">
-						<button
-							className="login100-form-btn"
-							onClick={onSubmit}
-						>
-							<b>Request this Book</b>
-						</button>
-					</div>
-			</BackSide>
-		</Flippy>
-		</BookRequestCardStyled>
-	);
+  return (
+    <BookRequestCardStyled>
+      <Flippy flipOnHover={true} className="card">
+        <FrontSide>
+          <div className="mainbox">
+            <div className="topbox">
+              <div className="name">{name}</div>
+            </div>
+            <div className="bottombox">
+              <div className="lender_name">
+                <div>
+                  <i class="fa fa-address-card-o icon" aria-hidden="true"></i>
+                </div>
+                <div className="heading">Lender Name:</div>
+                <div>{lender_name}</div>
+              </div>
+              <div className="lender_name">
+                <div>
+                  <i class="fa fa-address-card-o icon" aria-hidden="true"></i>
+                </div>
+                <div className="heading">Author:</div>
+                <div>{author}</div>
+              </div>
+              <div className="lender_name">
+                <div>
+                  <i class="fa fa-address-card-o icon" aria-hidden="true"></i>
+                </div>
+                <div className="heading">Publisher:</div>
+                <div>{publisher}</div>
+              </div>
+            </div>
+          </div>
+        </FrontSide>
+        <BackSide>
+          <div className="container-login100-form-btn back-side">
+            <button className="login100-form-btn" onClick={onSubmit}>
+              <b>Request this Book</b>
+            </button>
+          </div>
+        </BackSide>
+      </Flippy>
+    </BookRequestCardStyled>
+  );
 };
 
- const mapStateToProps = (state) => ({ user: state.users });
+const mapStateToProps = (state) => ({ user: state.users });
 
- export default connect(mapStateToProps)(BookRequestCard);
+export default connect(mapStateToProps)(BookRequestCard);

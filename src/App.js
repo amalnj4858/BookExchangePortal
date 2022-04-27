@@ -14,6 +14,7 @@ import Duespage from "./Pages/Duespage";
 import Profilepage from "./Pages/Profilepage";
 import Passwordchange from "./Pages/Passwordchange";
 import Adminlandingpage from "./Pages/Adminlandingpage";
+import Applyforextension from "./Pages/Applyforextension";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           element={<Passwordchange />}
         />
         <Route path="/adminlanding" element={<Adminlandingpage />} />
+        <Route path="/userslanding/extension" element={<Applyforextension />} />
         <Route path="/userslanding/profile" element={<Profilepage />} />
         <Route path="/userslanding/returnbook" element={<Bookreturnpage />} />
         <Route path="/userslanding/bookpool" element={<Bookpoolpage />} />

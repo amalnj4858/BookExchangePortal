@@ -138,75 +138,74 @@ const Requestcardstyled = styled.div`
 `;
 
 const Requestcard = ({ request }) => {
-	const [bookname, setBookname] = useState(null);
-	const [borrower, setBorrower] = useState(null);
-	const navigate = useNavigate();
-	useEffect(() => {
-		axios
-			.get(`http://localhost:8080/books/getbookbyid?bookid=${request.book_id}`)
-			.then((res) => setBookname(res.data.name));
-		axios
-			.get(`http://localhost:8080/users/findbyid?id=${request.borrower_id}`)
-			.then((res) => setBorrower(res.data.name));
-	}, []);
+  const [bookname, setBookname] = useState(null);
+  const [borrower, setBorrower] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/books/getbookbyid?bookid=${request.book_id}`)
+      .then((res) => setBookname(res.data.name));
+    axios
+      .get(`http://localhost:8080/users/findbyid?id=${request.borrower_id}`)
+      .then((res) => setBorrower(res.data.name));
+  }, []);
 
-	const currentDate = new Date();
+  const currentDate = new Date();
 
-	const onAccept = (e) => {
-		e.preventDefault();
-		const transaction = {
-			request_id: request.request_id,
-			book_id: request.book_id,
-			borrower_id: request.borrower_id,
-			lender_id: request.lender_id,
-			issue_date: new Date(),
-			expected_return_date: new Date(
-				currentDate.setMonth(currentDate.getMonth() + 1)
-			),
-			book_status: "Lent",
-		};
-		axios
-			.post("http://localhost:8080/transactions", transaction)
-			.then((res) => {
-				alert(res.data);
-				navigate("/userslanding", { replace: true });
-			});
-	};
+  const onAccept = (e) => {
+    e.preventDefault();
+    const transaction = {
+      request_id: request.request_id,
+      book_id: request.book_id,
+      borrower_id: request.borrower_id,
+      lender_id: request.lender_id,
+      issue_date: new Date(),
+      expected_return_date: new Date(
+        currentDate.setMonth(currentDate.getMonth() + 1)
+      ),
+      book_status: "Lent",
+    };
+    axios
+      .post("http://localhost:8080/transactions", transaction)
+      .then((res) => {
+        alert(res.data);
+        navigate("/userslanding", { replace: true });
+      });
+  };
 
-	return (
-		<Requestcardstyled>
-			<Flippy flipOnHover={true} className="card">
-			<FrontSide>
-				<div className="mainbox">
-					<div className="topbox">
-						<div className="name">{bookname}</div>
-					</div>
-					<div className="bottombox">
-						<div className="lender_name">
-								<div><i class="fa fa-address-book-o" aria-hidden="true"></i></div>
-								<div className="heading">Lender Name:</div>
-								<div>{borrower}</div> 
-						</div>
-					</div>
-				</div>
-			</FrontSide>	
-			<BackSide>
-					<div className="container-login100-form-btn back-side">
-					{request.status === "pending" ? (
-						<button
-							className="login100-form-btn"
-							onClick={onAccept}
-						>
-							<b>Accept</b>
-						</button>
-					) : (
-						<p>Accepted</p>
-					)}
-					</div>
-			</BackSide>
-		</Flippy>
-		</Requestcardstyled>
-	);
+  return (
+    <Requestcardstyled>
+      <Flippy flipOnHover={true} className="card">
+        <FrontSide>
+          <div className="mainbox">
+            <div className="topbox">
+              <div className="name">{bookname}</div>
+            </div>
+            <div className="bottombox">
+              <div className="lender_name">
+                <div>
+                  <i class="fa fa-address-book-o" aria-hidden="true"></i>
+                </div>
+                <div className="heading">Borrower Name:</div>
+                <div>{borrower}</div>
+              </div>
+            </div>
+          </div>
+        </FrontSide>
+        <BackSide>
+          <div className="container-login100-form-btn back-side">
+            {request.status === "pending" ? (
+              <button className="login100-form-btn" onClick={onAccept}>
+                <b>Accept</b>
+              </button>
+            ) : (
+              <p>Accepted</p>
+            )}
+          </div>
+        </BackSide>
+      </Flippy>
+    </Requestcardstyled>
+  );
 };
 
 export default Requestcard;
