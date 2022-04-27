@@ -39,6 +39,9 @@ const LandingPageOptions = ({ loggedin }) => {
           <Link className="link" to="/userslanding/profile">
             <OptionCard name={"My Profile"} />
           </Link>
+          <Link className="link" to="/userslanding/lendings">
+            <OptionCard name={"Current Lendings"} />
+          </Link>
           <Link className="link" to="/userslanding/lendabook">
             <OptionCard name={"Lend a Book"} />
           </Link>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Extensioncard from "../Components/Extensioncard";
 
@@ -13,8 +14,13 @@ const Applyforextensionstyled = styled.div`
 
 const Applyforextensionpage = ({ user }) => {
   const [transactions, setTransactions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user) {
+      navigate("userslanding", { replace: true });
+      return;
+    }
     axios
       .get(
         `http://localhost:8080/transactions/getTransactionbyid?id=${user.id}`

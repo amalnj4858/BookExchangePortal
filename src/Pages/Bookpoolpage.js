@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import Bookpool from "../Components/Bookspool";
+import { connect } from "react-redux";
 
 const Bookpoolpagestyled = styled.div`
   height: 100%;
@@ -10,9 +12,15 @@ const Bookpoolpagestyled = styled.div`
   justify-content: center;
 `;
 
-const Bookpoolpage = () => {
+const Bookpoolpage = ({ user }) => {
   const [books, setBooks] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!user) {
+      navigate("userslanding", { replace: true });
+      return;
+    }
     axios.get("http://localhost:8080/books").then((res) => {
       setBooks(res.data);
     });
@@ -25,4 +33,6 @@ const Bookpoolpage = () => {
   );
 };
 
-export default Bookpoolpage;
+const mapStateToProps = (state) => ({ user: state.users });
+
+export default connect(mapStateToProps)(Bookpoolpage);

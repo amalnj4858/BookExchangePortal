@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Bookreturncard from "../Components/Bookreturncard";
+import { useNavigate } from "react-router";
 
 const Bookreturnpagestyled = styled.div`
   height: 100%;
@@ -16,8 +17,13 @@ const Bookreturnpagestyled = styled.div`
 `;
 const Bookreturnpage = ({ user }) => {
   const [booksLent, setBooksLent] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (!user) {
+      navigate("userslanding", { replace: true });
+      return;
+    }
     axios
       .get(
         `http://localhost:8080/transactions/getTransactionbyid?id=${user.id}`

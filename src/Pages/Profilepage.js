@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const Profilepagestyled = styled.div`
   height: 100%;
@@ -13,6 +14,15 @@ const Profilepagestyled = styled.div`
 `;
 
 const Profilepage = ({ user }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("userslanding", { replace: true });
+      return;
+    }
+  }, []);
+
   return (
     <Profilepagestyled>
       <h1>YOUR PROFILE</h1>
