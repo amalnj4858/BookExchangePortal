@@ -19,7 +19,7 @@ const BooksLentCard = ({ book }) => {
     axios
       .get(`http://localhost:8080/books/withdrawbook?bookid=${book.id}`)
       .then((res) => {
-        alert("Deleted Successfully!");
+        alert(res.data);
         navigate("userslanding", { replace: true });
       });
   };

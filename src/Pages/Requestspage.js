@@ -27,10 +27,12 @@ const RequestsPage = ({ user }) => {
       navigate("signin", { replace: true });
       return;
     }
-    axios.get("http://localhost:8080/users/getAllRequests").then((res) => {
+    axios.get("http://localhost:8080/requests/getAllRequests").then((res) => {
       setRequests(res.data);
     });
   }, []);
+
+  console.log(requests);
 
   return (
     <RequestsPagestyled>

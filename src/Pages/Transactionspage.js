@@ -27,9 +27,11 @@ const TransactionsPage = ({ user }) => {
       navigate("signin", { replace: true });
       return;
     }
-    axios.get("http://localhost:8080/users/getalltransactions").then((res) => {
-      setTransactions(res.data);
-    });
+    axios
+      .get("http://localhost:8080/transactions/getalltransactions")
+      .then((res) => {
+        setTransactions(res.data);
+      });
   }, []);
 
   return (
