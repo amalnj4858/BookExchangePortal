@@ -25,12 +25,20 @@ const LandingPageOptions = ({ loggedin }) => {
   return (
     <LandingPageOptionsStyled>
       {loggedin === "admin" ? (
-        <>
-          <p>USERS</p>
-          <p>BOOKS</p>
-          <p>TRANSACTIONS</p>
-          <p>REQUESTS</p>
-        </>
+        <div className="main">
+          <Link className="link" to="/adminlanding/users">
+            <OptionCard name={"Users"} />
+          </Link>
+          <Link className="link" to="/adminlanding/bookpool">
+            <OptionCard name={"Book Pool"} photoURL={bookPoolPhoto} />
+          </Link>
+          <Link className="link" to="/adminlanding/transactions">
+            <OptionCard name={"Transactions"} />
+          </Link>
+          <Link className="link" to="/adminlanding/requests">
+            <OptionCard name={"Requests"} />
+          </Link>
+        </div>
       ) : (
         <div className="main">
           <Link className="link" to="/userslanding/bookpool">

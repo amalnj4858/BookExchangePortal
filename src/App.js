@@ -16,6 +16,9 @@ import Passwordchange from "./Pages/Passwordchange";
 import Adminlandingpage from "./Pages/Adminlandingpage";
 import Applyforextension from "./Pages/Applyforextension";
 import CurrentLendingspage from "./Pages/CurrentLendingspage";
+import Userspage from "./Pages/Userspage";
+import Transactionspage from "./Pages/Transactionspage";
+import Requestspage from "./Pages/Requestspage";
 
 const App = () => {
   return (
@@ -37,6 +40,13 @@ const App = () => {
         />
         <Route path="/adminlanding" element={<Adminlandingpage />} />
         <Route path="/userslanding/extension" element={<Applyforextension />} />
+        <Route path="/adminlanding/bookpool" element={<Bookpoolpage />} />
+        <Route
+          path="/adminlanding/transactions"
+          element={<Transactionspage />}
+        />
+        <Route path="/adminlanding/requests" element={<Requestspage />} />
+        <Route path="/adminlanding/users" element={<Userspage />} />
         <Route
           path="/userslanding/lendings"
           element={<CurrentLendingspage />}
