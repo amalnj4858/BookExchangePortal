@@ -1,3 +1,4 @@
 1. search bar for the pages
 2. images when no books etc
 3. better styling for request card + BookRequestCard
+4. profile page revamp

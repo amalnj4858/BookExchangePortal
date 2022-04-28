@@ -11,6 +11,7 @@ const RequestsPagestyled = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1em;
+  flex-direction:column;
 `;
 
 const RequestsPage = ({ user }) => {
@@ -36,6 +37,7 @@ const RequestsPage = ({ user }) => {
 
   return (
     <RequestsPagestyled>
+      <h1>REQUESTS</h1>
       {requests.length > 0 ? <Card data={requests} /> : <h2>NO REQUESTS</h2>}
     </RequestsPagestyled>
   );

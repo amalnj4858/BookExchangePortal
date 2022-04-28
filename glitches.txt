@@ -1,3 +1,4 @@
 glitches- 
-1.when refreshing nabar doesnt work
-2. BookRequestCard- user prop needed?
+1.when refreshing nabar doesnt work- everything does not work.
+2. admin page navbar changes
+3. request extension- date changing?

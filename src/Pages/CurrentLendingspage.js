@@ -8,11 +8,12 @@ import BooksLentCard from "../Components/BooksLentCard";
 const CurrentLendingspagestyled = styled.div`
   height: 100%;
   display: flex;
+  flex-wrap:wrap;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 1em;
+  gap: 3em;
   margin: 1em;
+margin-top:3em;
 `;
 
 const CurrentLendingspage = ({ user }) => {

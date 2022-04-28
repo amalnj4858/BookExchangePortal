@@ -11,6 +11,7 @@ const TransactionsPagestyled = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1em;
+  flex-direction:column;
 `;
 
 const TransactionsPage = ({ user }) => {
@@ -36,6 +37,7 @@ const TransactionsPage = ({ user }) => {
 
   return (
     <TransactionsPagestyled>
+      <h1>TRANSACTIONS</h1>
       {transactions.length > 0 ? (
         <Card data={transactions} />
       ) : (

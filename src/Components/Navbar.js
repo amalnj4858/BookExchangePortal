@@ -10,7 +10,7 @@ const Nav = styled.div`
 	background: #DA0037;
 	display: flex;
 	flex-wrap:wrap;
-    align-items: center;
+	align-items: center;
 	gap: 2em;
 	width: 100%;
 	box-sizing: border-box;
@@ -20,7 +20,7 @@ const Nav = styled.div`
   & .main{
 	display: flex;
 	flex-wrap:wrap;
-    align-items: center;
+	align-items: center;
   }
   & .Navbar{
 	  display:flex;
@@ -64,13 +64,13 @@ const Nav = styled.div`
   & .signout{
 	display: flex;
 	flex-wrap:wrap;
-    align-items: right;
-    justify-content:center;
-    margin-left:12em;
-    font-weight:800;
-    border: solid black 3px;
-    border-radius:5em;
-    padding:0.1em;
+	align-items: right;
+	justify-content:center;
+	margin-left:12em;
+	font-weight:800;
+	border: solid black 3px;
+	border-radius:5em;
+	padding:0.1em;
 }
 
   @media (max-width: 768px) {
@@ -107,10 +107,30 @@ const Navbar = ({ user,signOut }) => {
  const onSignOutClick = () => {
 	 signOut();
   };
-  console.log(user);
+  
   return (
 	<Nav className="Navbar">
-	  {user ? (<div className="main">
+	  {user ? user.name=="admin"?(<div className="main">
+	<Link to="/adminlanding" className="link home">
+		Home
+	  </Link>
+	  <Link to="/adminlanding/bookpool" className="link contact">
+		Book Pool
+	  </Link>
+	  <Link to="/adminlanding/requests" className="link contact">
+		Requests
+	  </Link>
+	  <Link to="/adminlanding/transactions" className="link contact">
+	Transactions
+	  </Link>
+	  <Link to="/adminlanding/users" className="link contact">
+		Users
+	  </Link>
+	  <div className="signout">
+	  <Link to="/" className="link " onClick={onSignOutClick}>
+		Sign Out
+
+	  </Link></div></div>):(<div className="main">
 	<Link to="/userslanding" className="link home">
 		Home
 	  </Link>
@@ -139,7 +159,8 @@ const Navbar = ({ user,signOut }) => {
 	  <Link to="/" className="link " onClick={onSignOutClick}>
 		Sign Out
 
-	  </Link></div></div>):<div className="Heading"><div>Book  Exchange  Portal</div></div>}
+	  </Link></div></div>):<div className="Heading"><div>Book  Exchange  Portal</div></div>
+	  }
 	</Nav>
   );
 };

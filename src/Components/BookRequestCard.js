@@ -102,7 +102,7 @@ const BookRequestCardStyled = styled.div`
 		justify-content:center;
 		align-items:center;
 		width:25em;
-		height:6.2em;
+		height:12.8em;
 	}
 	
 	& .login100-form-btn:hover {

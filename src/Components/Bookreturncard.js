@@ -199,10 +199,10 @@ const Returnbookcard = ({ book, user }) => {
 			    <div className="desc">
 				    <div className="left">
 				         <div className="author icon-desc"><i class="fa fa-user icon" aria-hidden="true"></i> <span className="heading">Author:</span> {bookLent.author}</div>
-				         <div className="publisher icon-desc"><i class="fa fa-building icon" aria-hidden="true"></i> <span className="heading">Publisher:</span>  {bookLent.lender_name} </div>
+				         <div className="publisher icon-desc"><i class="fa fa-building icon" aria-hidden="true"></i> <span className="heading">Publisher:</span>  {bookLent.publisher} </div>
 				     </div>
 				    <div className="right">
-				          <div className="lender_name icon-desc"><i class="fa fa-users icon" aria-hidden="true"></i> <span className="heading">Lender Name:</span> {book.expected_return_date} </div>
+				          <div className="lender_name icon-desc"><i class="fa fa-users icon" aria-hidden="true"></i> <span className="heading">Lender Name:</span> {bookLent.lender_name} </div>
 						<div className="container-login100-form-btn return-btn">
 						<button
 							className="login100-form-btn"
