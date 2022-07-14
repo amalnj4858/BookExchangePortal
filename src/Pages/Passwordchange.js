@@ -40,7 +40,7 @@ const Passwordchange = ({ user }) => {
 
     axios
       .get(
-        `http://localhost:8080/users/updatepassword?id=${user.id}&password=${newPassword}`
+        `https://bookportalapi.herokuapp.com/users/updatepassword?id=${user.id}&password=${newPassword}`
       )
       .then(() => {
         alert("New password updated!");

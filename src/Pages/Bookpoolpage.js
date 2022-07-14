@@ -21,7 +21,7 @@ const Bookpoolpage = ({ user }) => {
       navigate("userslanding", { replace: true });
       return;
     }
-    axios.get("http://localhost:8080/books").then((res) => {
+    axios.get("https://bookportalapi.herokuapp.com/books").then((res) => {
       setBooks(res.data);
     });
   }, []);

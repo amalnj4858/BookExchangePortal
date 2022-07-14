@@ -147,12 +147,12 @@ const BookRequestCard = ({ user, name, lender_name, author, publisher }) => {
     }
 
     axios
-      .get(`http://localhost:8080/users/findbyid?id=${user.id}`)
+      .get(`https://bookportalapi.herokuapp.com/users/findbyid?id=${user.id}`)
       .then((res) => {
         if (res.data.due_amt === 0) {
           axios
             .get(
-              `http://localhost:8080/books/getbook?name=${name}&lender_name=${lender_name}`
+              `https://bookportalapi.herokuapp.com/books/getbook?name=${name}&lender_name=${lender_name}`
             )
             .then((res) => {
               const book = res.data;
@@ -172,7 +172,7 @@ const BookRequestCard = ({ user, name, lender_name, author, publisher }) => {
                 return;
               }
               axios
-                .post("http://localhost:8080/requests", request)
+                .post("https://bookportalapi.herokuapp.com/requests", request)
                 .then((res) => {
                   if (res.data === "Request Created") {
                     alert("Request Created!");

@@ -161,67 +161,76 @@ const Extensioncardstyled = styled.div`
 `;
 
 const Extensioncard = ({ transaction }) => {
-	const [bookname, setBookname] = useState();
-	const [lender, setLender] = useState();
-	const [expectedReturn, setExpectedReturn] = useState();
+  const [bookname, setBookname] = useState();
+  const [lender, setLender] = useState();
+  const [expectedReturn, setExpectedReturn] = useState();
 
-	console.log(transaction);
+  console.log(transaction);
 
-	useEffect(() => {
-		axios
-			.get(
-				`http://localhost:8080/books/getbookbyid?bookid=${transaction.book_id}`
-			)
-			.then((res) => {
-				setBookname(res.data.name);
-				setLender(res.data.lender_name);
-				setExpectedReturn(transaction.expected_return_date);
-			})
-			.catch((e) => alert(e.message));
-	}, []);
+  useEffect(() => {
+    axios
+      .get(
+        `https://bookportalapi.herokuapp.com/books/getbookbyid?bookid=${transaction.book_id}`
+      )
+      .then((res) => {
+        setBookname(res.data.name);
+        setLender(res.data.lender_name);
+        setExpectedReturn(transaction.expected_return_date);
+      })
+      .catch((e) => alert(e.message));
+  }, []);
 
-	const onRequest = () => {
-		const returndate = new Date(transaction.expected_return_date);
-		const extensionRequest = {
-			user_id: transaction.borrower_id,
-			book_id: transaction.book_id,
-			transaction_id: transaction.id,
-			extendedDate: new Date(returndate.getTime() + 15 * 24 * 60 * 60 * 1000),
-		};
-		axios
-			.post("http://localhost:8080/extensionRequests", extensionRequest)
-			.then((res) => {
-				alert(res.data);
-			});
-	};
+  const onRequest = () => {
+    const returndate = new Date(transaction.expected_return_date);
+    const extensionRequest = {
+      user_id: transaction.borrower_id,
+      book_id: transaction.book_id,
+      transaction_id: transaction.id,
+      extendedDate: new Date(returndate.getTime() + 15 * 24 * 60 * 60 * 1000),
+    };
+    axios
+      .post(
+        "https://bookportalapi.herokuapp.com/extensionRequests",
+        extensionRequest
+      )
+      .then((res) => {
+        alert(res.data);
+      });
+  };
 
-	return (
-		<Extensioncardstyled>
-			<div className="mainbox">
-              <div className="topbox">
-                <div className="name">{bookname}</div>
-              </div>
-              <div className="bottombox">
-                <div className="desc">
-                    <div className="left">
-                        <div className="author icon-desc">
-					    <span className="icon">< i class="fa fa-user icon" aria-hidden="true"></i> </span>
-					    <span className="heading">Lender:</span> {lender}</div>
-
-                    </div>
-                    <div className="right">
-				<div className="publisher icon-desc"><i class="fa fa-building icon" aria-hidden="true"></i> <span className="heading">Expected Return Date:</span>  {expectedReturn} </div>
-                    </div>
-                    </div>
-				<div className="container-login100-form-btn">
-				<button className="login100-form-btn" onClick={onRequest}>
-					  <b className="link_btn">Request Extension</b>
-				</button>
-		   </div>
+  return (
+    <Extensioncardstyled>
+      <div className="mainbox">
+        <div className="topbox">
+          <div className="name">{bookname}</div>
+        </div>
+        <div className="bottombox">
+          <div className="desc">
+            <div className="left">
+              <div className="author icon-desc">
+                <span className="icon">
+                  <i class="fa fa-user icon" aria-hidden="true"></i>{" "}
+                </span>
+                <span className="heading">Lender:</span> {lender}
               </div>
             </div>
-		</Extensioncardstyled>
-	);
+            <div className="right">
+              <div className="publisher icon-desc">
+                <i class="fa fa-building icon" aria-hidden="true"></i>{" "}
+                <span className="heading">Expected Return Date:</span>{" "}
+                {expectedReturn}{" "}
+              </div>
+            </div>
+          </div>
+          <div className="container-login100-form-btn">
+            <button className="login100-form-btn" onClick={onRequest}>
+              <b className="link_btn">Request Extension</b>
+            </button>
+          </div>
+        </div>
+      </div>
+    </Extensioncardstyled>
+  );
 };
 
 export default Extensioncard;

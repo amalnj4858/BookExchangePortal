@@ -424,7 +424,7 @@ const Signupform = ({ history, addUser }) => {
     };
 
     axios
-      .post(`http://localhost:8080/users`, user)
+      .post(`https://bookportalapi.herokuapp.com/users`, user)
       .then((res) => {
         if (res.data == "Duplicate email") {
           alert("This email has already been used by another user!");

@@ -36,7 +36,7 @@ const Requestsrecievedpage = ({ user }) => {
       return;
     }
     axios
-      .get(`http://localhost:8080/requests?id=${user.id}`)
+      .get(`https://bookportalapi.herokuapp.com/requests?id=${user.id}`)
       .then((res) => setRequests(res.data))
       .catch((err) => alert(err));
   }, []);

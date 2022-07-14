@@ -11,7 +11,7 @@ const RequestsPagestyled = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1em;
-  flex-direction:column;
+  flex-direction: column;
 `;
 
 const RequestsPage = ({ user }) => {
@@ -28,9 +28,11 @@ const RequestsPage = ({ user }) => {
       navigate("signin", { replace: true });
       return;
     }
-    axios.get("http://localhost:8080/requests/getAllRequests").then((res) => {
-      setRequests(res.data);
-    });
+    axios
+      .get("https://bookportalapi.herokuapp.com/requests/getAllRequests")
+      .then((res) => {
+        setRequests(res.data);
+      });
   }, []);
 
   console.log(requests);

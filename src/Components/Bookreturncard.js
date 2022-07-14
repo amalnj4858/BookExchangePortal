@@ -147,77 +147,87 @@ max-width:30em;
 `;
 
 const Returnbookcard = ({ book, user }) => {
-	const [bookLent, setBookLent] = useState();
-	const navigate = useNavigate();
+  const [bookLent, setBookLent] = useState();
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		axios
-			.get(`http://localhost:8080/books/getbookbyid?bookid=${book.book_id}`)
-			.then((res) => setBookLent(res.data));
-	}, []);
+  useEffect(() => {
+    axios
+      .get(
+        `https://bookportalapi.herokuapp.com/books/getbookbyid?bookid=${book.book_id}`
+      )
+      .then((res) => setBookLent(res.data));
+  }, []);
 
-	const onSubmit = () => {
-		if (!user) {
-			alert("Please login to continue");
-			return;
-		}
-		const currdate = new Date();
-		const expectedReturnDate = new Date(book.expected_return_date);
-		let dayslapsed =
-			(currdate.getTime() - expectedReturnDate.getTime()) / (1000 * 3600 * 24);
-		if (dayslapsed < 0) dayslapsed = 0;
-		axios
-			.post(
-				`http://localhost:8080/books/returnbook?bookid=${
-					book.book_id
-				}&returndate=${currdate.getFullYear()}-${
-					currdate.getMonth() + 1 < 10
-						? `0${currdate.getMonth() + 1}`
-						: `${currdate.getMonth() + 1}`
-				}-${currdate.getDate()}&numberofdayslate=${dayslapsed}&userid=${
-					user.id
-				}&transactionid=${book.id}`,
-				null
-			)
-			.then((res) => {
-				alert(res.data);
-				navigate("/userslanding", { replace: true });
-			})
-			.catch((e) => {
-				alert(e.message);
-			});
-	};
+  const onSubmit = () => {
+    if (!user) {
+      alert("Please login to continue");
+      return;
+    }
+    const currdate = new Date();
+    const expectedReturnDate = new Date(book.expected_return_date);
+    let dayslapsed =
+      (currdate.getTime() - expectedReturnDate.getTime()) / (1000 * 3600 * 24);
+    if (dayslapsed < 0) dayslapsed = 0;
+    axios
+      .post(
+        `https://bookportalapi.herokuapp.com/books/returnbook?bookid=${
+          book.book_id
+        }&returndate=${currdate.getFullYear()}-${
+          currdate.getMonth() + 1 < 10
+            ? `0${currdate.getMonth() + 1}`
+            : `${currdate.getMonth() + 1}`
+        }-${currdate.getDate()}&numberofdayslate=${dayslapsed}&userid=${
+          user.id
+        }&transactionid=${book.id}`,
+        null
+      )
+      .then((res) => {
+        alert(res.data);
+        navigate("/userslanding", { replace: true });
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
+  };
 
-	return (
-		<Returnbookcardstyled>
-			{bookLent ? (
-			<div className="mainbox">
-		     <div className="topbox">
-			     <div className="name">{bookLent.name}</div>
-		    </div>
-		    <div className="bottombox">
-			    <div className="desc">
-				    <div className="left">
-				         <div className="author icon-desc"><i class="fa fa-user icon" aria-hidden="true"></i> <span className="heading">Author:</span> {bookLent.author}</div>
-				         <div className="publisher icon-desc"><i class="fa fa-building icon" aria-hidden="true"></i> <span className="heading">Publisher:</span>  {bookLent.publisher} </div>
-				     </div>
-				    <div className="right">
-				          <div className="lender_name icon-desc"><i class="fa fa-users icon" aria-hidden="true"></i> <span className="heading">Lender Name:</span> {bookLent.lender_name} </div>
-						<div className="container-login100-form-btn return-btn">
-						<button
-							className="login100-form-btn"
-							onClick={onSubmit}
-						>
-							<b>Return Book</b>
-						</button>
-					</div>
-				    </div>
-				    </div>   
-				</div>
-			</div> 
-			) : null}
-		</Returnbookcardstyled>
-	);
+  return (
+    <Returnbookcardstyled>
+      {bookLent ? (
+        <div className="mainbox">
+          <div className="topbox">
+            <div className="name">{bookLent.name}</div>
+          </div>
+          <div className="bottombox">
+            <div className="desc">
+              <div className="left">
+                <div className="author icon-desc">
+                  <i class="fa fa-user icon" aria-hidden="true"></i>{" "}
+                  <span className="heading">Author:</span> {bookLent.author}
+                </div>
+                <div className="publisher icon-desc">
+                  <i class="fa fa-building icon" aria-hidden="true"></i>{" "}
+                  <span className="heading">Publisher:</span>{" "}
+                  {bookLent.publisher}{" "}
+                </div>
+              </div>
+              <div className="right">
+                <div className="lender_name icon-desc">
+                  <i class="fa fa-users icon" aria-hidden="true"></i>{" "}
+                  <span className="heading">Lender Name:</span>{" "}
+                  {bookLent.lender_name}{" "}
+                </div>
+                <div className="container-login100-form-btn return-btn">
+                  <button className="login100-form-btn" onClick={onSubmit}>
+                    <b>Return Book</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </Returnbookcardstyled>
+  );
 };
 
 const mapStateToProps = (state) => ({ user: state.users });

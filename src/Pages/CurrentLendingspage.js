@@ -8,12 +8,12 @@ import BooksLentCard from "../Components/BooksLentCard";
 const CurrentLendingspagestyled = styled.div`
   height: 100%;
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 3em;
   margin: 1em;
-margin-top:3em;
+  margin-top: 3em;
 `;
 
 const CurrentLendingspage = ({ user }) => {
@@ -26,7 +26,9 @@ const CurrentLendingspage = ({ user }) => {
       return;
     }
     axios
-      .get(`http://localhost:8080/books/getbookbylenderid?lenderid=${user.id}`)
+      .get(
+        `https://bookportalapi.herokuapp.com/books/getbookbylenderid?lenderid=${user.id}`
+      )
       .then((res) => setBooks(res.data));
   }, []);
 

@@ -24,7 +24,7 @@ const Duespage = ({ user }) => {
   useEffect(() => {
     console.log(user);
     axios
-      .get(`http://localhost:8080/users/findbyid?id=${user.id}`)
+      .get(`https://bookportalapi.herokuapp.com/users/findbyid?id=${user.id}`)
       .then((res) => {
         setDues(res.data.due_amt);
       });
@@ -32,7 +32,7 @@ const Duespage = ({ user }) => {
 
   const onButtonClick = () => {
     axios
-      .get(`http://localhost:8080/users/payoff?id=${user.id}`)
+      .get(`https://bookportalapi.herokuapp.com/users/payoff?id=${user.id}`)
       .then((res) => {
         alert(res.data);
         navigate("/userslanding", { replace: true });

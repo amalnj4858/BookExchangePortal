@@ -162,56 +162,65 @@ const BooksLentCardstyled = styled.div`
 `;
 
 const BooksLentCard = ({ book }) => {
-	const [borrower, setBorrower] = useState(null);
-	const navigate = useNavigate();
+  const [borrower, setBorrower] = useState(null);
+  const navigate = useNavigate();
 
-	const withdrawbook = () => {
-		axios
-			.get(`http://localhost:8080/books/withdrawbook?bookid=${book.id}`)
-			.then((res) => {
-				alert(res.data);
-				navigate("userslanding", { replace: true });
-			});
-	};
+  const withdrawbook = () => {
+    axios
+      .get(
+        `https://bookportalapi.herokuapp.com/books/withdrawbook?bookid=${book.id}`
+      )
+      .then((res) => {
+        alert(res.data);
+        navigate("userslanding", { replace: true });
+      });
+  };
 
-	useEffect(() => {
-		if (book.book_status.toLowerCase() === "unavailable")
-			axios
-				.get(`http://localhost:8080/transactions/getBorrower?bookid=${book.id}`)
-				.then((res) => setBorrower(res.data));
-	}, []);
+  useEffect(() => {
+    if (book.book_status.toLowerCase() === "unavailable")
+      axios
+        .get(
+          `https://bookportalapi.herokuapp.com/transactions/getBorrower?bookid=${book.id}`
+        )
+        .then((res) => setBorrower(res.data));
+  }, []);
 
-	return (
-		<BooksLentCardstyled>
-			<div className="mainbox">
-              <div className="topbox">
-                <div className="name">{book.name}</div>
-              </div>
-              <div className="bottombox">
-                <div className="desc">
-                    <div className="left">
-                        <div className="author icon-desc">
-					    <span className="icon">< i class="fa fa-user icon" aria-hidden="true"></i> </span>
-					    <span className="heading">Author:</span> {book.author}</div>
-
-                    </div>
-                    <div className="right">
-				<div className="publisher icon-desc"><i class="fa fa-building icon" aria-hidden="true"></i> <span className="heading">Publisher:</span>  {book.publisher} </div>
-                    </div>
-                    </div>
-				{book.book_status.toLowerCase() === "available" ? (
-				<div className="container-login100-form-btn">
-				<button className="login100-form-btn" onClick={withdrawbook}>
-					  <b className="link_btn">Withdraw Book</b>
-				</button>
-		   </div>
-			) : (
-				<div className="lent">Lent to {borrower}</div>
-			)}
+  return (
+    <BooksLentCardstyled>
+      <div className="mainbox">
+        <div className="topbox">
+          <div className="name">{book.name}</div>
+        </div>
+        <div className="bottombox">
+          <div className="desc">
+            <div className="left">
+              <div className="author icon-desc">
+                <span className="icon">
+                  <i class="fa fa-user icon" aria-hidden="true"></i>{" "}
+                </span>
+                <span className="heading">Author:</span> {book.author}
               </div>
             </div>
-		</BooksLentCardstyled>
-	);
+            <div className="right">
+              <div className="publisher icon-desc">
+                <i class="fa fa-building icon" aria-hidden="true"></i>{" "}
+                <span className="heading">Publisher:</span> {book.publisher}{" "}
+              </div>
+            </div>
+          </div>
+          {book.book_status.toLowerCase() === "available" ? (
+            <div className="container-login100-form-btn">
+              <button className="login100-form-btn" onClick={withdrawbook}>
+                <b className="link_btn">Withdraw Book</b>
+              </button>
+            </div>
+          ) : (
+            <div className="lent">Lent to {borrower}</div>
+          )}
+        </div>
+      </div>
+    </BooksLentCardstyled>
+  );
 };
 
 export default BooksLentCard;

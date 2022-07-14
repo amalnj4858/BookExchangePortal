@@ -11,7 +11,7 @@ const TransactionsPagestyled = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1em;
-  flex-direction:column;
+  flex-direction: column;
 `;
 
 const TransactionsPage = ({ user }) => {
@@ -29,7 +29,9 @@ const TransactionsPage = ({ user }) => {
       return;
     }
     axios
-      .get("http://localhost:8080/transactions/getalltransactions")
+      .get(
+        "https://bookportalapi.herokuapp.com/transactions/getalltransactions"
+      )
       .then((res) => {
         setTransactions(res.data);
       });

@@ -143,10 +143,14 @@ const Requestcard = ({ request }) => {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/books/getbookbyid?bookid=${request.book_id}`)
+      .get(
+        `https://bookportalapi.herokuapp.com/books/getbookbyid?bookid=${request.book_id}`
+      )
       .then((res) => setBookname(res.data.name));
     axios
-      .get(`http://localhost:8080/users/findbyid?id=${request.borrower_id}`)
+      .get(
+        `https://bookportalapi.herokuapp.com/users/findbyid?id=${request.borrower_id}`
+      )
       .then((res) => setBorrower(res.data.name));
   }, []);
 
@@ -166,7 +170,7 @@ const Requestcard = ({ request }) => {
       book_status: "Lent",
     };
     axios
-      .post("http://localhost:8080/transactions", transaction)
+      .post("https://bookportalapi.herokuapp.com/transactions", transaction)
       .then((res) => {
         alert(res.data);
         navigate("/userslanding", { replace: true });
