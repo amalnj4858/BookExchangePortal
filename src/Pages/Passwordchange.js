@@ -8,9 +8,15 @@ const Passwordchangestyled = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  margin-top: 15em;
   justify-content: center;
   flex-direction: column;
   gap: 1em;
+  border: 2px solid white;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1em;
 `;
 
 const Passwordchange = ({ user }) => {

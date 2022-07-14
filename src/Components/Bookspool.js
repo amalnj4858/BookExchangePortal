@@ -35,7 +35,6 @@ const Bookpool = ({ data }) => {
 					);
 				})}
 			</div>
-			{console.log(data)}
 		</Bookpoolstyled>
 	);
 };
