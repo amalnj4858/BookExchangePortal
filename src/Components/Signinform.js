@@ -316,6 +316,7 @@ const SignInFormStyled = styled.div`
 const Signinform = ({ addUser }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
@@ -345,9 +346,12 @@ const Signinform = ({ addUser }) => {
       }
     }
 
+    setLoading(true);
+
     axios
       .post(`https://bookportalapi.herokuapp.com/users/signin`, user)
       .then((res) => {
+        setLoading(false);
         if (res.data == "Authorised") {
           axios
             .get(
@@ -359,6 +363,7 @@ const Signinform = ({ addUser }) => {
         } else alert(res.data);
       })
       .catch((e) => {
+        setLoading(false);
         alert(e.message);
       });
   };
@@ -401,7 +406,11 @@ const Signinform = ({ addUser }) => {
             </span>
           </div>
           <div className="container-login100-form-btn">
-            <button className="login100-form-btn" onClick={onSubmit}>
+            <button
+              className="login100-form-btn"
+              onClick={onSubmit}
+              disabled={loading}
+            >
               <b>Sign In</b>
             </button>
           </div>

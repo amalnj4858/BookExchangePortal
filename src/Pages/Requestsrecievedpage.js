@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Requestcard from "../Components/Requestscard";
 import { connect } from "react-redux";
+import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router";
 
 const Requestsrecievedpagestyled = styled.div`
@@ -24,10 +25,14 @@ const Requestsrecievedpagestyled = styled.div`
     margin-top: 0.5em;
     margin-bottom: 0.5em;
   }
+  & .spinner {
+    margin-top: 300px;
+  }
 `;
 
 const Requestsrecievedpage = ({ user }) => {
   const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,15 +42,25 @@ const Requestsrecievedpage = ({ user }) => {
     }
     axios
       .get(`https://bookportalapi.herokuapp.com/requests?id=${user.id}`)
-      .then((res) => setRequests(res.data))
+      .then((res) => {
+        setLoading(false);
+        setRequests(res.data);
+      })
       .catch((err) => alert(err));
   }, []);
-  console.log(requests);
+
   return (
     <Requestsrecievedpagestyled>
       <div className="heading1">REQUESTS RECIEVED</div>
       <div className="requests">
-        {requests.length > 0 ? (
+        {loading ? (
+          <ClipLoader
+            color="#ffffff"
+            size={150}
+            loading={loading}
+            className="spinner"
+          />
+        ) : requests.length > 0 ? (
           requests.map((request) => <Requestcard request={request} />)
         ) : (
           <h3>NO REQUEST RECIEVED</h3>

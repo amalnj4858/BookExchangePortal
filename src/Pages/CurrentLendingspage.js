@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
+import { ClipLoader } from "react-spinners";
 import styled from "styled-components";
 import BooksLentCard from "../Components/BooksLentCard";
 
@@ -14,10 +15,14 @@ const CurrentLendingspagestyled = styled.div`
   gap: 3em;
   margin: 1em;
   margin-top: 3em;
+  & .spinner {
+    margin-top: 300px;
+  }
 `;
 
 const CurrentLendingspage = ({ user }) => {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,12 +34,22 @@ const CurrentLendingspage = ({ user }) => {
       .get(
         `https://bookportalapi.herokuapp.com/books/getbookbylenderid?lenderid=${user.id}`
       )
-      .then((res) => setBooks(res.data));
+      .then((res) => {
+        setLoading(false);
+        setBooks(res.data);
+      });
   }, []);
 
   return (
     <CurrentLendingspagestyled>
-      {books.length > 0 ? (
+      {loading ? (
+        <ClipLoader
+          color="#ffffff"
+          size={150}
+          loading={loading}
+          className="spinner"
+        />
+      ) : books.length > 0 ? (
         books.map((book) => <BooksLentCard book={book} />)
       ) : (
         <h1>NO BOOKS LENT</h1>

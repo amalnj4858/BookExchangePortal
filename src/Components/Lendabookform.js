@@ -161,6 +161,7 @@ const Lendabookform = ({ user }) => {
   const [name, setName] = useState("");
   const [author, setAuthor] = useState("");
   const [publisher, setPublisher] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const book = {
     name: name,
@@ -181,6 +182,7 @@ const Lendabookform = ({ user }) => {
       alert("Please enter all the details.");
       return;
     }
+    setLoading(true);
     axios
       .post(`https://bookportalapi.herokuapp.com/books`, book)
       .then((res) => {
@@ -188,8 +190,10 @@ const Lendabookform = ({ user }) => {
           alert("success");
           return;
         } else alert("You have already lent this book to the pool.");
+        setLoading(false);
       })
       .catch((e) => {
+        setLoading(false);
         alert(e.message);
       });
   };
@@ -240,7 +244,11 @@ const Lendabookform = ({ user }) => {
           </span>
         </div>
         <div className="container-login100-form-btn">
-          <button className="login100-form-btn" onClick={onSubmit}>
+          <button
+            className="login100-form-btn"
+            onClick={onSubmit}
+            disabled={loading}
+          >
             <b>Submit</b>
           </button>
         </div>

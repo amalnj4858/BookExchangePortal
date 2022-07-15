@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Card from "../Components/Card";
+import { ClipLoader } from "react-spinners";
 
 const Userspagestyled = styled.div`
   height: 90vh;
@@ -14,10 +15,14 @@ const Userspagestyled = styled.div`
   gap: 3em;
   margin-top: -5em;
   margin-bottom: 2em;
+  & .inner {
+    margin-top: 300px;
+  }
 `;
 
 const Userspage = ({ user }) => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,6 +38,7 @@ const Userspage = ({ user }) => {
     axios
       .get("https://bookportalapi.herokuapp.com/users/getallusers")
       .then((res) => {
+        setLoading(false);
         setUsers(res.data);
       });
   }, []);
@@ -40,8 +46,18 @@ const Userspage = ({ user }) => {
   return (
     <Userspagestyled>
       <h1>USERS</h1>
-      {users.length > 0 ? <Card data={users} /> : <h2>NO USERS</h2>}
-      {console.log(users)}
+      {loading ? (
+        <ClipLoader
+          color="#ffffff"
+          size={150}
+          loading={loading}
+          className="spinner"
+        />
+      ) : users.length > 0 ? (
+        <Card data={users} />
+      ) : (
+        <h2>NO USERS</h2>
+      )}
     </Userspagestyled>
   );
 };

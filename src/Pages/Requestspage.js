@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Card from "../Components/Card";
+import { ClipLoader } from "react-spinners";
 
 const RequestsPagestyled = styled.div`
   height: 100%;
@@ -12,10 +13,14 @@ const RequestsPagestyled = styled.div`
   justify-content: center;
   gap: 1em;
   flex-direction: column;
+  & .spinner {
+    margin-top: 300px;
+  }
 `;
 
 const RequestsPage = ({ user }) => {
   const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,16 +36,26 @@ const RequestsPage = ({ user }) => {
     axios
       .get("https://bookportalapi.herokuapp.com/requests/getAllRequests")
       .then((res) => {
+        setLoading(false);
         setRequests(res.data);
       });
   }, []);
 
-  console.log(requests);
-
   return (
     <RequestsPagestyled>
       <h1>REQUESTS</h1>
-      {requests.length > 0 ? <Card data={requests} /> : <h2>NO REQUESTS</h2>}
+      {loading ? (
+        <ClipLoader
+          color="#ffffff"
+          size={150}
+          loading={loading}
+          className="spinner"
+        />
+      ) : requests.length > 0 ? (
+        <Card data={requests} />
+      ) : (
+        <h2>NO REQUESTS</h2>
+      )}
     </RequestsPagestyled>
   );
 };

@@ -61,6 +61,17 @@ const Nav = styled.div`
 	margin-left:auto;
 	margin-right:auto;
   }
+  & .signout1{
+	display: flex;
+	flex-wrap:wrap;
+	align-items: right;
+	justify-content:center;
+	margin-left: 800px;
+	font-weight:800;
+	border: solid black 3px;
+	border-radius:5em;
+	padding:0.1em;
+}
   & .signout{
 	display: flex;
 	flex-wrap:wrap;
@@ -102,77 +113,84 @@ const Nav = styled.div`
   }
 `;
 
-const Navbar = ({ user,signOut }) => {
-
- const onSignOutClick = () => {
-	 signOut();
+const Navbar = ({ user, signOut }) => {
+  const onSignOutClick = () => {
+    signOut();
   };
-  
+
   return (
-	<Nav className="Navbar">
-	  {user ? user.name=="admin"?(<div className="main">
-	<Link to="/adminlanding" className="link home">
-		Home
-	  </Link>
-	  <Link to="/adminlanding/bookpool" className="link contact">
-		Book Pool
-	  </Link>
-	  <Link to="/adminlanding/requests" className="link contact">
-		Requests
-	  </Link>
-	  <Link to="/adminlanding/transactions" className="link contact">
-	Transactions
-	  </Link>
-	  <Link to="/adminlanding/users" className="link contact">
-		Users
-	  </Link>
-	  <div className="signout">
-	  <Link to="/" className="link " onClick={onSignOutClick}>
-		Sign Out
-
-	  </Link></div></div>):(<div className="main">
-	<Link to="/userslanding" className="link home">
-		Home
-	  </Link>
-	  <Link to="/userslanding/bookpool" className="link contact">
-		Book Pool
-	  </Link>
-	  <Link to="/userslanding/lendabook" className="link contact">
-		Lend a Book
-	  </Link>
-	  <Link to="/userslanding/requestabook" className="link contact">
-	Request a Book
-	  </Link>
-	  <Link to="/userslanding/bookpoo" className="link contact">
-		Apply for Extension
-	  </Link>
-	  <Link to="/userslanding/requestsrecieved" className="link contact">
-		Requests Recieved
-	  </Link>
-	  <Link to="/userslanding/returnbook" className="link contact">
-		Return Book
-	  </Link>
-	  <Link to="/userslanding/bookpoo" className="link contact">
-	Dues
-	  </Link>
-	  <div className="signout">
-	  <Link to="/" className="link " onClick={onSignOutClick}>
-		Sign Out
-
-	  </Link></div></div>):<div className="Heading"><div>Book  Exchange  Portal</div></div>
-	  }
-	</Nav>
+    <Nav className="Navbar">
+      {user ? (
+        user.name == "admin" ? (
+          <div className="main">
+            <Link to="/adminlanding" className="link home">
+              Home
+            </Link>
+            <Link to="/adminlanding/bookpool" className="link contact">
+              Book Pool
+            </Link>
+            <Link to="/adminlanding/requests" className="link contact">
+              Requests
+            </Link>
+            <Link to="/adminlanding/transactions" className="link contact">
+              Transactions
+            </Link>
+            <Link to="/adminlanding/users" className="link contact">
+              Users
+            </Link>
+            <div className="signout1">
+              <Link to="/" className="link " onClick={onSignOutClick}>
+                Sign Out
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="main">
+            <Link to="/userslanding" className="link home">
+              Home
+            </Link>
+            <Link to="/userslanding/bookpool" className="link contact">
+              Book Pool
+            </Link>
+            <Link to="/userslanding/lendabook" className="link contact">
+              Lend a Book
+            </Link>
+            <Link to="/userslanding/requestabook" className="link contact">
+              Request a Book
+            </Link>
+            <Link to="/userslanding/bookpoo" className="link contact">
+              Apply for Extension
+            </Link>
+            <Link to="/userslanding/requestsrecieved" className="link contact">
+              Requests Recieved
+            </Link>
+            <Link to="/userslanding/returnbook" className="link contact">
+              Return Book
+            </Link>
+            <Link to="/userslanding/bookpoo" className="link contact">
+              Dues
+            </Link>
+            <div className="signout">
+              <Link to="/" className="link " onClick={onSignOutClick}>
+                Sign Out
+              </Link>
+            </div>
+          </div>
+        )
+      ) : (
+        <div className="Heading">
+          <div>Book Exchange Portal</div>
+        </div>
+      )}
+    </Nav>
   );
 };
 
 const mapStateToProps = (state) => ({ user: state.users });
 const mapDispatchToProps = (dispatch) => {
-	return {
-		signOut:()=>dispatch(signOutUser())
-	};
+  return {
+    signOut: () => dispatch(signOutUser()),
+  };
 };
 
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(Navbar);
-
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

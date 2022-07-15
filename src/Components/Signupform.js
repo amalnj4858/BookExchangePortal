@@ -392,6 +392,7 @@ const Signupform = ({ history, addUser }) => {
   const [address, setAddress] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const onSubmit = (e) => {
@@ -423,16 +424,20 @@ const Signupform = ({ history, addUser }) => {
       password: password,
     };
 
+    setLoading(true);
     axios
       .post(`https://bookportalapi.herokuapp.com/users`, user)
       .then((res) => {
         if (res.data == "Duplicate email") {
           alert("This email has already been used by another user!");
+          setLoading(false);
           return;
         } else if (res.data == "Duplicate phone") {
           alert("This number has already been used by another user!");
+          setLoading(false);
           return;
         }
+
         user.id = parseInt(res.data);
         addUser(user);
         alert("success");
@@ -440,6 +445,7 @@ const Signupform = ({ history, addUser }) => {
       })
       .catch((e) => {
         alert("duplicate phone/email");
+        setLoading(false);
         return;
       });
   };
@@ -543,7 +549,11 @@ const Signupform = ({ history, addUser }) => {
             </span>
           </div>
           <div className="container-login100-form-btn">
-            <button className="login100-form-btn" onClick={onSubmit}>
+            <button
+              className="login100-form-btn"
+              onClick={onSubmit}
+              disabled={loading}
+            >
               <b>Sign Up</b>
             </button>
           </div>

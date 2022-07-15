@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import Card from "../Components/Card";
+import { ClipLoader } from "react-spinners";
 
 const TransactionsPagestyled = styled.div`
   height: 100%;
@@ -12,10 +13,14 @@ const TransactionsPagestyled = styled.div`
   justify-content: center;
   gap: 1em;
   flex-direction: column;
+  & .spinner {
+    margin-top: 300px;
+  }
 `;
 
 const TransactionsPage = ({ user }) => {
   const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,6 +38,7 @@ const TransactionsPage = ({ user }) => {
         "https://bookportalapi.herokuapp.com/transactions/getalltransactions"
       )
       .then((res) => {
+        setLoading(false);
         setTransactions(res.data);
       });
   }, []);
@@ -40,7 +46,14 @@ const TransactionsPage = ({ user }) => {
   return (
     <TransactionsPagestyled>
       <h1>TRANSACTIONS</h1>
-      {transactions.length > 0 ? (
+      {loading ? (
+        <ClipLoader
+          color="#ffffff"
+          size={150}
+          loading={loading}
+          className="spinner"
+        />
+      ) : transactions.length > 0 ? (
         <Card data={transactions} />
       ) : (
         <h2>NO TRANSACTIONS</h2>

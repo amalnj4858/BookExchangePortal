@@ -22,7 +22,6 @@ const Duespage = ({ user }) => {
   const [navigate, setNavigate] = useState();
 
   useEffect(() => {
-    console.log(user);
     axios
       .get(`https://bookportalapi.herokuapp.com/users/findbyid?id=${user.id}`)
       .then((res) => {
@@ -44,6 +43,7 @@ const Duespage = ({ user }) => {
       {user ? (
         <div className="dues">
           <h2>YOU OWE</h2>
+
           <h1>{dues}Rs</h1>
           {dues > 0 ? <button onClick={onButtonClick}>Pay dues</button> : null}
         </div>
