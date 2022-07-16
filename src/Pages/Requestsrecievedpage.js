@@ -10,6 +10,7 @@ const Requestsrecievedpagestyled = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 50px;
 
   & .requests {
     display: flex;

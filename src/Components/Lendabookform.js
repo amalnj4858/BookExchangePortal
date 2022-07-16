@@ -169,7 +169,7 @@ const Lendabookform = ({ user }) => {
     publisher: publisher,
     lender_name: user.name,
     lender_address: user.address,
-    book_status: "available",
+    book_status: "Available",
     lender_id: user.id,
   };
 
@@ -186,11 +186,11 @@ const Lendabookform = ({ user }) => {
     axios
       .post(`https://bookportalapi.herokuapp.com/books`, book)
       .then((res) => {
+        setLoading(false);
         if (res.data == "Success") {
           alert("success");
           return;
         } else alert("You have already lent this book to the pool.");
-        setLoading(false);
       })
       .catch((e) => {
         setLoading(false);
