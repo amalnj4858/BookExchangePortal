@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
+import { ClipLoader } from "react-spinners";
 import styled from "styled-components";
 import Extensioncard from "../Components/Extensioncard";
 
 const Applyforextensionstyled = styled.div`
-  height: 100%;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,10 +15,17 @@ const Applyforextensionstyled = styled.div`
   gap: 3em;
   margin-top: 3em;
   margin-bottom: 3em;
+  & h1 {
+    margin-top: 250px;
+  }
+  & .spinner {
+    margin-top: 250px;
+  }
 `;
 
 const Applyforextensionpage = ({ user }) => {
   const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,6 +38,7 @@ const Applyforextensionpage = ({ user }) => {
         `https://bookportalapi.herokuapp.com/transactions/getTransactionbyid?id=${user.id}`
       )
       .then((res) => {
+        setLoading(false);
         setTransactions(
           res.data.filter(
             (transaction) => transaction.book_status.toLowerCase() === "lent"
@@ -40,12 +49,19 @@ const Applyforextensionpage = ({ user }) => {
 
   return (
     <Applyforextensionstyled>
-      {transactions.length > 0 ? (
+      {loading ? (
+        <ClipLoader
+          color={`#ffffff`}
+          loading={loading}
+          size={150}
+          className="spinner"
+        />
+      ) : transactions.length > 0 ? (
         transactions.map((transaction) => (
           <Extensioncard transaction={transaction} />
         ))
       ) : (
-        <h2>NO BOOKS BORROWED</h2>
+        <h1>NO BOOKS BORROWED</h1>
       )}
     </Applyforextensionstyled>
   );

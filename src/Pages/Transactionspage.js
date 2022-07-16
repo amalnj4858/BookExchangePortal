@@ -14,7 +14,10 @@ const TransactionsPagestyled = styled.div`
   gap: 1em;
   flex-direction: column;
   & .spinner {
-    margin-top: 300px;
+    margin-top: 275px;
+  }
+  & h1 {
+    margin-top: 275px;
   }
 `;
 
@@ -45,7 +48,6 @@ const TransactionsPage = ({ user }) => {
 
   return (
     <TransactionsPagestyled>
-      <h1>TRANSACTIONS</h1>
       {loading ? (
         <ClipLoader
           color="#ffffff"
@@ -56,7 +58,7 @@ const TransactionsPage = ({ user }) => {
       ) : transactions.length > 0 ? (
         <Card data={transactions} />
       ) : (
-        <h2>NO TRANSACTIONS</h2>
+        <h1>NO TRANSACTIONS</h1>
       )}
     </TransactionsPagestyled>
   );

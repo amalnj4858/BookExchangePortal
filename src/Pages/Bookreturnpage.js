@@ -16,8 +16,12 @@ const Bookreturnpagestyled = styled.div`
   margin-bottom: 2em;
   gap: 2em;
 
+  & h1 {
+    margin-top: 275px;
+  }
+
   & .spinner {
-    margin-top: 300px;
+    margin-top: 250px;
   }
 `;
 const Bookreturnpage = ({ user }) => {
@@ -57,7 +61,7 @@ const Bookreturnpage = ({ user }) => {
       ) : booksLent.length > 0 ? (
         booksLent.map((book) => <Bookreturncard book={book} />)
       ) : (
-        "No Books Borrowed"
+        <h1>NO BOOKS BORROWED</h1>
       )}
     </Bookreturnpagestyled>
   );

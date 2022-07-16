@@ -14,7 +14,10 @@ const RequestsPagestyled = styled.div`
   gap: 1em;
   flex-direction: column;
   & .spinner {
-    margin-top: 300px;
+    margin-top: 275px;
+  }
+  & h1 {
+    margin-top: 275px;
   }
 `;
 
@@ -43,7 +46,6 @@ const RequestsPage = ({ user }) => {
 
   return (
     <RequestsPagestyled>
-      <h1>REQUESTS</h1>
       {loading ? (
         <ClipLoader
           color="#ffffff"
@@ -54,7 +56,7 @@ const RequestsPage = ({ user }) => {
       ) : requests.length > 0 ? (
         <Card data={requests} />
       ) : (
-        <h2>NO REQUESTS</h2>
+        <h1>NO REQUESTS</h1>
       )}
     </RequestsPagestyled>
   );

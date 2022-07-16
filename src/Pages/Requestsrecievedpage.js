@@ -18,15 +18,13 @@ const Requestsrecievedpagestyled = styled.div`
     flex-wrap: wrap;
     gap: 2em;
   }
-  & .heading1 {
-    color: white;
-    font-family: "Square Peg", cursive;
-    font-size: 3em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+
+  & h1 {
+    margin-top: 275px;
   }
+
   & .spinner {
-    margin-top: 300px;
+    margin-top: 250px;
   }
 `;
 
@@ -51,7 +49,6 @@ const Requestsrecievedpage = ({ user }) => {
 
   return (
     <Requestsrecievedpagestyled>
-      <div className="heading1">REQUESTS RECIEVED</div>
       <div className="requests">
         {loading ? (
           <ClipLoader
@@ -63,7 +60,7 @@ const Requestsrecievedpage = ({ user }) => {
         ) : requests.length > 0 ? (
           requests.map((request) => <Requestcard request={request} />)
         ) : (
-          <h3>NO REQUEST RECIEVED</h3>
+          <h1>NO REQUEST RECIEVED</h1>
         )}
       </div>
     </Requestsrecievedpagestyled>

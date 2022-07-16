@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 const Duespagestyled = styled.div`
-  height: 100%;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -14,7 +14,10 @@ const Bookrequestformstyled = styled.div`
   margin-top: 3em;
   gap: 2em;
   & .spinner {
-    margin-top: 300px;
+    margin-top: 250px;
+  }
+  & h1 {
+    margin-top: 275px;
   }
 `;
 
@@ -48,7 +51,7 @@ const Bookrequestform = () => {
           />
         ))
       ) : (
-        <h1>No Books Available</h1>
+        <h1>NO BOOKS AVAILABLE</h1>
       )}
     </Bookrequestformstyled>
   );

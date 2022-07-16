@@ -12,6 +12,10 @@ const Bookpoolpagestyled = styled.div`
   align-items: center;
   justify-content: center;
 
+  & h1 {
+    margin-top: 300px;
+  }
+
   & .spinner {
     margin-top: 300px;
   }
@@ -45,7 +49,7 @@ const Bookpoolpage = ({ user }) => {
       ) : books.length > 0 ? (
         <Bookpool data={books} />
       ) : (
-        <h2>NO BOOKS</h2>
+        <h1>NO BOOKS</h1>
       )}
     </Bookpoolpagestyled>
   );

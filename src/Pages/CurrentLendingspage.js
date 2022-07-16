@@ -16,7 +16,10 @@ const CurrentLendingspagestyled = styled.div`
   margin: 1em;
   margin-top: 3em;
   & .spinner {
-    margin-top: 300px;
+    margin-top: 275px;
+  }
+  & h1 {
+    margin-top: 270px;
   }
 `;
 
